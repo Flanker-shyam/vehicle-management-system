@@ -1,19 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
-import { AuthEntity } from 'src/auth/auth.entity';
-import { VehicleEntity } from './vehicle.entity';
+import { Vehicles } from './vehicle.entity';
 import { VehicleController } from './vehicle.controller';
 import { VehicleService } from './vehicle.service';
-import { DriverVehicleAssignmentEntity } from './vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from './vehicleToDriverAssignment.entitty';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      VehicleEntity,
-      AuthEntity,
-      DriverVehicleAssignmentEntity,
-    ]), // Import and provide the AuthEntity to TypeOrmModule
+    TypeOrmModule.forFeature([Vehicles, VehicleAssignment]), // Import and provide the AuthEntity to TypeOrmModule
     ScheduleModule,
   ],
   controllers: [VehicleController],

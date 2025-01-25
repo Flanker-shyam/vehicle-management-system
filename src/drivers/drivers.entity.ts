@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { DriverVehicleAssignmentEntity } from '../vehicle/vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from '../vehicle/vehicleToDriverAssignment.entitty';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class DriversEntity {
+export class Drivers {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,10 +31,7 @@ export class DriversEntity {
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @OneToMany(
-    () => DriverVehicleAssignmentEntity,
-    (assignment) => assignment.driver,
-  )
+  @OneToMany(() => VehicleAssignment, (assignment) => assignment.driver)
   @Exclude()
-  assignments: DriverVehicleAssignmentEntity[];
+  assignments: VehicleAssignment[];
 }

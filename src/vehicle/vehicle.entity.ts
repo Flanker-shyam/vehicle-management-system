@@ -6,10 +6,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { DriverVehicleAssignmentEntity } from './vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from './vehicleToDriverAssignment.entitty';
 
 @Entity()
-export class VehicleEntity {
+export class Vehicles {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -43,10 +43,7 @@ export class VehicleEntity {
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @OneToMany(
-    () => DriverVehicleAssignmentEntity,
-    (assignment) => assignment.vehicle,
-  )
+  @OneToMany(() => VehicleAssignment, (assignment) => assignment.vehicle)
   @Exclude()
-  assignments: DriverVehicleAssignmentEntity[];
+  assignments: VehicleAssignment[];
 }

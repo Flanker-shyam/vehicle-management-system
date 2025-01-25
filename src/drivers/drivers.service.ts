@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { DriversEntity } from './drivers.entity';
+import { Drivers } from './drivers.entity';
 import { DriversDto } from './drivers.dto';
 
 @Injectable()
 export class DriversService {
   constructor(
-    @InjectRepository(DriversEntity)
-    private driversRepository: Repository<DriversEntity>,
+    @InjectRepository(Drivers)
+    private driversRepository: Repository<Drivers>,
   ) {}
 
-  async getAllDrivers(): Promise<DriversEntity[] | any> {
+  async getAllDrivers(): Promise<Drivers[] | any> {
     try {
       const drivers = await this.driversRepository.find();
       return drivers;
@@ -22,7 +22,7 @@ export class DriversService {
   }
 
   async addDriver(driverData: DriversDto) {
-    const driverEntity = new DriversEntity();
+    const driverEntity = new Drivers();
     driverEntity.service_number = driverData.service_number;
     driverEntity.rank = driverData.rank;
     driverEntity.first_name = driverData.first_name;
@@ -39,7 +39,7 @@ export class DriversService {
     }
   }
 
-  async getDriverById(id: number): Promise<DriversEntity | any> {
+  async getDriverById(id: number): Promise<Drivers | any> {
     try {
       const driver = await this.driversRepository.findOne({ where: { id } });
       return driver;

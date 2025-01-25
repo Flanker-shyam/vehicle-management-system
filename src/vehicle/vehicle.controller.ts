@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { VehicleService } from './vehicle.service';
 import { getVehicleResponseDto } from './dto/vehicle.response.dto';
 import { AddVehicleRequestDto } from './dto/vehicle.request.dto';
@@ -8,8 +8,16 @@ export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
 
   @Get()
-  async getAllVehicle(): Promise<getVehicleResponseDto[]> {
-    return await this.vehicleService.getAllVehicles();
+  async getAllVehicle(
+    @Param('category') category: string,
+    @Param('class') currentClass: number,
+    @Param('spare') sparePartRequested: string,
+  ): Promise<getVehicleResponseDto[]> {
+    return await this.vehicleService.getAllVehicles(
+      category,
+      currentClass,
+      sparePartRequested,
+    );
   }
 
   @Post()

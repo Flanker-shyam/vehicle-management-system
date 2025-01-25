@@ -1,5 +1,5 @@
-import { VehicleEntity } from '../vehicle/vehicle.entity';
-import { DriversEntity } from '../drivers/drivers.entity';
+import { Vehicles } from '../vehicle/vehicle.entity';
+import { Drivers } from '../drivers/drivers.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -10,17 +10,17 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class DriverVehicleAssignmentEntity {
+export class VehicleAssignment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => DriversEntity, (driver) => driver.assignments)
+  @ManyToOne(() => Drivers, (driver) => driver.assignments)
   @JoinColumn({ name: 'driver_id' })
-  driver: DriversEntity;
+  driver: Drivers;
 
-  @ManyToOne(() => VehicleEntity, (vehicle) => vehicle.assignments)
+  @ManyToOne(() => Vehicles, (vehicle) => vehicle.assignments)
   @JoinColumn({ name: 'vehicle_id' })
-  vehicle: VehicleEntity;
+  vehicle: Vehicles;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   assignmentDate: Date;

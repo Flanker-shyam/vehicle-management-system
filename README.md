@@ -60,6 +60,7 @@ For Linux
   ```bash
   export npm_config_name=vehicleMigrations (for unix)
   npm run migration:generate
+  npm run build
   npm run migration:run
   ```
     

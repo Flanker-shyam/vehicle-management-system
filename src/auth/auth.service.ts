@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AuthEntity } from './auth.entity';
+import { Auth } from './auth.entity';
 import { LoginDto, LoginResponseDto } from './auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { validateData } from '../helpers/validate';
@@ -9,8 +9,8 @@ import { validateData } from '../helpers/validate';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(AuthEntity)
-    private authEntityRepository: Repository<AuthEntity>,
+    @InjectRepository(Auth)
+    private authRepository: Repository<Auth>,
     private jwtService: JwtService,
   ) {}
 
@@ -24,7 +24,7 @@ export class AuthService {
   ): Promise<LoginResponseDto | string | { error: string }> {
     await validateData(userData, LoginDto);
     try {
-      const user = await this.authEntityRepository.findOne({
+      const user = await this.authRepository.findOne({
         where: { username: userData.username },
       });
       if (user) {

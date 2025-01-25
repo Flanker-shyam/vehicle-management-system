@@ -1,10 +1,10 @@
 import { registerAs } from '@nestjs/config';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
-import { DriversEntity } from '../drivers/drivers.entity';
-import { VehicleEntity } from '../vehicle/vehicle.entity';
-import { DriverVehicleAssignmentEntity } from '../vehicle/vehicleToDriverAssignment.entitty';
-import { AuthEntity } from '../auth/auth.entity';
+import { Drivers } from '../drivers/drivers.entity';
+import { Vehicles } from '../vehicle/vehicle.entity';
+import { VehicleAssignment } from '../vehicle/vehicleToDriverAssignment.entitty';
+import { Auth } from '../auth/auth.entity';
 
 dotenv.config();
 
@@ -15,12 +15,7 @@ const config = {
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  entities: [
-    VehicleEntity,
-    DriversEntity,
-    DriverVehicleAssignmentEntity,
-    AuthEntity,
-  ],
+  entities: [Vehicles, Drivers, VehicleAssignment, Auth],
   migrations: ['dist/migrations/*{.ts,.js}'],
   autoLoadEntities: true,
   synchronize: false,
