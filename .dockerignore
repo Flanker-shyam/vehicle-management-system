@@ -1,5 +1,41 @@
 Dockerfile
 .dockerignore
-node_modules
+/node_modules
 npm-debug.log
-dist
+dist# Ignore node_modules directory
+node_modules/
+
+# Ignore local build directories
+dist/
+build/
+/dist
+/src/migrations
+src/migrations/
+
+
+# Ignore environment variable files
+.env
+
+# Ignore logs
+*.log
+
+# Ignore Dockerfile and docker-compose files (if not needed in the container)
+Dockerfile
+docker-compose.yml
+
+# Ignore test files and directories
+tests/
+*.test.js
+*.spec.js
+
+# Ignore version control folders
+.git/
+.gitignore
+
+# Ignore IDE and editor configurations
+.vscode/
+.idea/
+
+# Ignore package lock files (optional, but useful if you want to build fresh)
+package-lock.json
+yarn.lock

@@ -1,5 +1,4 @@
 export class DriversDto {
-  id: number;
   service_number: string;
   rank: string;
   first_name: string;

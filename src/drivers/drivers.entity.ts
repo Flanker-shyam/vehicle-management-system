@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { DriverVehicleAssignmentEntity } from '../vehicle/vehicleToDriverAssignment.entitty';
 import {
   Entity,
@@ -34,5 +35,6 @@ export class DriversEntity {
     () => DriverVehicleAssignmentEntity,
     (assignment) => assignment.driver,
   )
+  @Exclude()
   assignments: DriverVehicleAssignmentEntity[];
 }

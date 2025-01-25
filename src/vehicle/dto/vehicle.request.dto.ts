@@ -1,5 +1,4 @@
 export class AddVehicleRequestDto {
-  id: number;
   vehicleNumber: string;
   category: string;
   ododmeterReading: number;

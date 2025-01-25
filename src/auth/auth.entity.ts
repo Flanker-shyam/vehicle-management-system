@@ -21,7 +21,7 @@ export class AuthEntity {
   password: string;
 
   @Column({ default: false })
-  isAdmin: boolean;
+  is_admin: boolean;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
