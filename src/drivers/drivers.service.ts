@@ -38,4 +38,14 @@ export class DriversService {
       throw err;
     }
   }
+
+  async getDriverById(id: number): Promise<DriversEntity | any> {
+    try {
+      const driver = await this.driversRepository.findOne({ where: { id } });
+      return driver;
+    } catch (err) {
+      console.log('Error occured while fetching driver by id', err);
+      throw err;
+    }
+  }
 }

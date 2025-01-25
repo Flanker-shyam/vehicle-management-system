@@ -3,13 +3,13 @@ import { VehicleService } from './vehicle.service';
 import { getVehicleResponseDto } from './dto/vehicle.response.dto';
 import { AddVehicleRequestDto } from './dto/vehicle.request.dto';
 
-@Controller('url')
+@Controller('vehicle')
 export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
 
   @Get()
   async getAllVehicle(): Promise<getVehicleResponseDto[]> {
-    return await this.getAllVehicle();
+    return await this.vehicleService.getAllVehicles();
   }
 
   @Post()

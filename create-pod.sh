@@ -6,7 +6,7 @@ echo "Creating a pod with three containers"
 echo "-------------------------------------"
 echo "Create a pod with name shortify_pod"
 
-podman pod create --name shortify_pod -p 3000:3000 -p 5432:5432 -p 6379:6379
+podman pod create --name shortify_pod -p 5000:5000 -p 5432:5432 -p 6379:6379
 
 echo "Pod created successfully"
 podman pod list

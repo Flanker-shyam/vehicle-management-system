@@ -5,6 +5,7 @@ import { AuthEntity } from './auth.entity';
 import { LoginDto, LoginResponseDto } from './auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { validateData } from '../helpers/validate';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -28,11 +29,11 @@ export class AuthService {
       });
       if (user) {
         if (user.password === userData.password) {
-          const token = await this.generateToken(user.username, user.isAdmin);
+          const token = await this.generateToken(user.username, user.is_admin);
           return {
             username: user.username,
             token: token,
-            isAdmin: user.isAdmin,
+            isAdmin: user.is_admin,
           } as LoginResponseDto;
         } else {
           throw new UnauthorizedException('Password is incorrect');

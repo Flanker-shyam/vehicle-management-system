@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -46,5 +47,6 @@ export class VehicleEntity {
     () => DriverVehicleAssignmentEntity,
     (assignment) => assignment.vehicle,
   )
+  @Exclude()
   assignments: DriverVehicleAssignmentEntity[];
 }
