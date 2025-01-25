@@ -9,12 +9,14 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { DriversModule } from './drivers/drivers.module';
+import { VehicleAssignmentModule } from './vehicleAssignment/vehicleAssignment.module';
 
 @Module({
   imports: [
     AuthModule,
     VehicleModule,
     DriversModule,
+    VehicleAssignmentModule,
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,

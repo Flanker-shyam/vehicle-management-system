@@ -5,7 +5,7 @@ import { AuthMiddleware } from 'src/middlewares/auth.middleware';
 import { DriversController } from './drivers.controller';
 import { DriversService } from './drivers.service';
 import { Drivers } from './drivers.entity';
-import { VehicleAssignment } from 'src/vehicle/vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from 'src/vehicleAssignment/vehicleToDriverAssignment.entitty';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Drivers, VehicleAssignment])],

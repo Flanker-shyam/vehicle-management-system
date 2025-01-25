@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { VehicleAssignment } from './vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
 
 @Entity()
 export class Vehicles {

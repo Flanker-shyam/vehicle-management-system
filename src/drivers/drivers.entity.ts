@@ -1,5 +1,5 @@
 import { Exclude } from 'class-transformer';
-import { VehicleAssignment } from '../vehicle/vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
 import {
   Entity,
   PrimaryGeneratedColumn,

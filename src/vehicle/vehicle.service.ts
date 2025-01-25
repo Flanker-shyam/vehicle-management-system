@@ -17,18 +17,20 @@ export class VehicleService {
     sparePartRequested?: string,
   ): Promise<Vehicles[] | any> {
     try {
-      const query = this.vehicleRepository.createQueryBuilder('vehicle');
+      const query = this.vehicleRepository.createQueryBuilder('vehicles');
 
       if (category) {
-        query.andWhere('vehicle.category = :category', { category });
+        query.andWhere('vehicles.category = :category', { category });
       }
 
       if (currentClass) {
-        query.andWhere('vehicle.currentClas = :currentClas', { currentClass });
+        query.andWhere('vehicles.currentClass = :currentClass', {
+          currentClass,
+        });
       }
 
       if (sparePartRequested) {
-        query.andWhere('vehicle.sparePartRequested = :sparePartRequested', {
+        query.andWhere('vehicles.sparePartRequested = :sparePartRequested', {
           sparePartRequested,
         });
       }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { VehicleService } from './vehicle.service';
 import { getVehicleResponseDto } from './dto/vehicle.response.dto';
 import { AddVehicleRequestDto } from './dto/vehicle.request.dto';
@@ -9,9 +9,9 @@ export class VehicleController {
 
   @Get()
   async getAllVehicle(
-    @Param('category') category: string,
-    @Param('class') currentClass: number,
-    @Param('spare') sparePartRequested: string,
+    @Query('category') category: string,
+    @Query('currentClass') currentClass: number,
+    @Query('sparePartRequested') sparePartRequested: string,
   ): Promise<getVehicleResponseDto[]> {
     return await this.vehicleService.getAllVehicles(
       category,

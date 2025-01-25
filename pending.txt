@@ -1,0 +1,5 @@
+1. when assign -> change assigned driver from vehicle
+2. when assign -> change assigned vehicle from driver
+3. when return -> remove this assigned driver and vehicle (other fields) field and update assigned tables and mark isActive false
+4. setup cron jobs for alerts
+5. fetch all data along with driver and vehicle when fetch assigned vehicles

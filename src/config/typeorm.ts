@@ -3,7 +3,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
 import { Drivers } from '../drivers/drivers.entity';
 import { Vehicles } from '../vehicle/vehicle.entity';
-import { VehicleAssignment } from '../vehicle/vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
 import { Auth } from '../auth/auth.entity';
 
 dotenv.config();

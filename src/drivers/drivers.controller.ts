@@ -1,4 +1,4 @@
-import { Controller, Get, Body, Post } from '@nestjs/common';
+import { Controller, Get, Body, Post, Param } from '@nestjs/common';
 import { DriversDto } from './drivers.dto';
 import { DriversService } from './drivers.service';
 
@@ -17,7 +17,7 @@ export class DriversController {
   }
 
   @Get(':id')
-  async getDriverById(id: number): Promise<DriversDto | any> {
+  async getDriverById(@Param('id') id: number): Promise<DriversDto | any> {
     return await this.driversService.getDriverById(id);
   }
 }
