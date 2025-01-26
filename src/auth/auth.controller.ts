@@ -21,9 +21,7 @@ export class AuthController {
   }
 
   @Post('login')
-  async loginUser(
-    @Body() userData: LoginDto,
-  ): Promise<LoginResponseDto | string | { error: string }> {
+  async loginUser(@Body() userData: LoginDto): Promise<LoginResponseDto> {
     return this.authService.loginUser(userData);
   }
 }

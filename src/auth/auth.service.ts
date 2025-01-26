@@ -49,9 +49,7 @@ export class AuthService {
     return this.jwtService.signAsync(payload);
   }
 
-  async loginUser(
-    userData: LoginDto,
-  ): Promise<LoginResponseDto | string | { error: string }> {
+  async loginUser(userData: LoginDto): Promise<LoginResponseDto> {
     await validateData(userData, LoginDto);
     try {
       const user = await this.authRepository.findOne({
@@ -72,7 +70,7 @@ export class AuthService {
         throw new UnauthorizedException('User not found');
       }
     } catch (err) {
-      return { error: err.message };
+      throw new UnauthorizedException(`Failed to login user: ${err.message}`);
     }
   }
 }
