@@ -46,7 +46,7 @@ export class AuthService {
         } as RegsiterResponseDto;
       }
     } catch (err) {
-      throw new Error(`Internal server error: ${err}`);
+      throw err;
     }
   }
 
@@ -76,7 +76,7 @@ export class AuthService {
         throw new UnauthorizedException('User not found');
       }
     } catch (err) {
-      throw new Error(`Internal server error: ${err}`);
+      throw err;
     }
   }
 }

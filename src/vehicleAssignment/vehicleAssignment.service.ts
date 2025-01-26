@@ -1,10 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { VehicleAssignment } from './vehicleToDriverAssignment.entitty';
 import { Vehicles } from '../vehicle/vehicle.entity';
 import { Drivers } from '../drivers/drivers.entity';
 import { VehicleAssignmentRequestDto } from './dto/vehicleAssignment.request.dto';
+import { connectionSource } from '../config/typeorm';
 
 @Injectable()
 export class VehicleAssignmentService {
@@ -20,29 +26,55 @@ export class VehicleAssignmentService {
   async assignVehicleToDriver(
     assignmentData: VehicleAssignmentRequestDto,
   ): Promise<number> {
-    const vehicleAssignment = new VehicleAssignment();
-    const vehicle = await this.vehiclesRepository.findOne({
-      where: { id: Number(assignmentData.vehicleId) },
-    });
-    if (!vehicle) {
-      throw new Error('Vehicle not found');
-    }
-    vehicleAssignment.vehicle = vehicle;
-
-    const driver = await this.driversRepository.findOne({
-      where: { id: Number(assignmentData.driverId) },
-    });
-    if (!driver) {
-      throw new Error('Driver not found');
-    }
-    vehicleAssignment.driver = driver;
-    vehicleAssignment.is_active = assignmentData.isActive;
+    const queryRunner = connectionSource.createQueryRunner();
     try {
-      await this.vehicleAssignmentRepository.save(vehicleAssignment);
+      await queryRunner.startTransaction();
+      const vehicleAssignment = new VehicleAssignment();
+
+      const vehicle = await queryRunner.manager.findOne(Vehicles, {
+        where: { id: Number(assignmentData.vehicleId) },
+      });
+      if (!vehicle) {
+        throw new NotFoundException('Vehicle not found');
+      }
+      vehicleAssignment.vehicle = vehicle;
+
+      const driver = await queryRunner.manager.findOne(Drivers, {
+        where: { id: Number(assignmentData.driverId) },
+      });
+      if (!driver) {
+        throw new NotFoundException('Driver not found');
+      }
+
+      const assignment = await queryRunner.manager.findOne(VehicleAssignment, {
+        where: {
+          vehicle: { id: vehicle.id },
+          driver: { id: driver.id },
+        },
+      });
+      if (assignment && assignment.is_active) {
+        throw new ConflictException('Vehicle is Already assigned and active');
+      }
+      vehicleAssignment.driver = driver;
+
+      vehicleAssignment.is_active = assignmentData.isActive;
+      await queryRunner.manager.save(vehicleAssignment);
+
+      vehicle.assigned_driver = assignmentData.driverId;
+      driver.assigned_vehicle = assignmentData.vehicleId;
+
+      await Promise.all([
+        queryRunner.manager.save(vehicle),
+        queryRunner.manager.save(driver),
+      ]);
+      await queryRunner.commitTransaction();
       return vehicleAssignment.id;
     } catch (err) {
-      console.log('Error occured while assigning vehicle', err);
-      throw new Error(`Internal server error: ${err}`);
+      await queryRunner.rollbackTransaction();
+      console.log('Error occured while assigning vehicle', err.message);
+      throw err;
+    } finally {
+      await queryRunner.release();
     }
   }
 
@@ -52,7 +84,17 @@ export class VehicleAssignmentService {
       return assignments;
     } catch (err) {
       console.log('Error occured while fetching all assignments', err);
-      throw new Error(`Internal server error: ${err}`);
+      throw new InternalServerErrorException(
+        `Internal server error: ${err.message}`,
+      );
     }
   }
+
+  async submitVehicle() {}
 }
+
+//remove assigned veh from dri
+//remove assigned dri from vehi
+//mark assignment active to false
+
+//update vehicle details

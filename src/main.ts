@@ -4,6 +4,7 @@ import { NotFoundExceptionFilter } from './filters/not-found-exception.fllter';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { connectionSource } from './config/typeorm';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,6 +27,7 @@ async function bootstrap() {
       max: 100,
     }),
   );
+  await connectionSource.initialize();
   await app.listen(5000);
 }
 bootstrap();

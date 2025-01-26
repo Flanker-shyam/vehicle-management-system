@@ -17,7 +17,7 @@ export class VehicleAssignmentController {
   @Post()
   async assignVehicleToDriver(
     @Body() vehicleAssignmentData: VehicleAssignmentRequestDto,
-  ) {
+  ): Promise<number> {
     return await this.vehicleAssignmentService.assignVehicleToDriver(
       vehicleAssignmentData,
     );

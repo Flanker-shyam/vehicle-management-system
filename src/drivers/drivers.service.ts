@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Drivers } from './drivers.entity';
@@ -18,7 +18,9 @@ export class DriversService {
       return drivers;
     } catch (err) {
       console.log('Error occured while fetching all drivers', err);
-      throw new Error(`Internal server error: ${err}`);
+      throw new InternalServerErrorException(
+        `Internal server error: ${err.message}`,
+      );
     }
   }
 
@@ -36,7 +38,9 @@ export class DriversService {
       return driver;
     } catch (err) {
       console.log('Error occured while adding driver', err);
-      throw new Error(`Internal server error: ${err}`);
+      throw new InternalServerErrorException(
+        `Internal server error: ${err.message}`,
+      );
     }
   }
 
@@ -46,7 +50,9 @@ export class DriversService {
       return driver;
     } catch (err) {
       console.log('Error occured while fetching driver by id', err);
-      throw new Error(`Internal server error: ${err}`);
+      throw new InternalServerErrorException(
+        `Internal server error: ${err.message}`,
+      );
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Vehicles } from './vehicle.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -42,7 +42,9 @@ export class VehicleService {
       return vehicles;
     } catch (err) {
       console.log('Error occurred while fetching all vehicles', err);
-      throw new Error(`Internal server error: ${err}`);
+      throw new InternalServerErrorException(
+        `Internal server error: ${err.message}`,
+      );
     }
   }
   async addVehicle(vehicleData: AddVehicleRequestDto) {
@@ -60,7 +62,14 @@ export class VehicleService {
       return vehicle;
     } catch (err) {
       console.log('Error occured while adding vehicle', err);
-      throw new Error(`Internal server error: ${err}`);
+      throw new InternalServerErrorException(
+        `Internal server error: ${err.message}`,
+      );
     }
   }
+
+  async updateVehicleDetails() {}
 }
+
+//spare part request
+// odometer
