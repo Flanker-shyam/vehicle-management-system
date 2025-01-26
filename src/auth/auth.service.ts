@@ -2,7 +2,12 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Auth } from './auth.entity';
-import { LoginDto, LoginResponseDto } from './auth.dto';
+import {
+  LoginDto,
+  LoginResponseDto,
+  RegisterDto,
+  RegsiterResponseDto,
+} from './auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { validateData } from '../helpers/validate';
 
@@ -13,6 +18,31 @@ export class AuthService {
     private authRepository: Repository<Auth>,
     private jwtService: JwtService,
   ) {}
+
+  async registerUser(userData: RegisterDto): Promise<RegsiterResponseDto> {
+    try {
+      const user = await this.authRepository.findOne({
+        where: { username: userData.username },
+      });
+      if (user) {
+        throw new Error(`User already exist`);
+      } else {
+        const newUser = new Auth();
+        newUser.name = userData.name;
+        newUser.username = userData.username;
+        newUser.password = userData.password;
+        newUser.is_admin = userData.isAdmin;
+        await this.authRepository.save(userData);
+        return {
+          name: newUser.name,
+          username: newUser.username,
+          isAdmin: newUser.is_admin,
+        } as RegsiterResponseDto;
+      }
+    } catch (err) {
+      throw new Error(`Failed to register user: ${err.message}`);
+    }
+  }
 
   async generateToken(username: string, isAdmin: boolean): Promise<string> {
     const payload = { username: username, isAdmin: isAdmin };

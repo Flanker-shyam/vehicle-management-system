@@ -43,3 +43,9 @@ export class LoginResponseDto {
   isAdmin: boolean;
   token: string;
 }
+
+export class RegsiterResponseDto {
+  name: string;
+  username: string;
+  isAdmin: boolean;
+}
