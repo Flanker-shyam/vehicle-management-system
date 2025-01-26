@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install project dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application code and migration script
 COPY . .
@@ -20,11 +20,11 @@ COPY . .
 RUN ls -alh /app
 
 # build the application
-RUN npm run build
+# RUN npm run build
 
-RUN rm -rf /app/src/migrations
+# RUN rm -rf /app/src/migrations
 
-RUN mkdir /app/src/migrations
+# RUN mkdir /app/src/migrations
 
 # Copy the entrypoint script
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh

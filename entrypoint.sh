@@ -24,7 +24,8 @@ export npm_config_name=vehicleMigrations
 npm run migration:generate
 
 ls -al src/migrations
-ls -al dist/migrations
+
+npm run build
 
 #Run Migrations
 echo 'Running migrations...'
@@ -37,8 +38,8 @@ npm run migration:run
 
 #Create Admin user if not exist
 echo 'Creating admin user...'
-PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d $DATABASE_NAME -c "SELECT 1 FROM auth_entity WHERE username = '$ADMIN_USERNAME'" | grep -q 1 || \
-    PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d $DATABASE_NAME -c "INSERT INTO auth_entity (name, username, password, is_admin) VALUES ('$ADMIN_NAME', '$ADMIN_USERNAME', '$ADMIN_PASSWORD', 'true'::boolean)";
+PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d $DATABASE_NAME -c "SELECT 1 FROM auth WHERE username = '$ADMIN_USERNAME'" | grep -q 1 || \
+    PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d $DATABASE_NAME -c "INSERT INTO auth (name, username, password, is_admin) VALUES ('$ADMIN_NAME', '$ADMIN_USERNAME', '$ADMIN_PASSWORD', 'true'::boolean)";
 
 # Start the server
 echo 'Starting the server...'

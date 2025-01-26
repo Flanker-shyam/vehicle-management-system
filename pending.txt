@@ -3,3 +3,16 @@
 3. when return -> remove this assigned driver and vehicle (other fields) field and update assigned tables and mark isActive false
 4. setup cron jobs for alerts
 5. fetch all data along with driver and vehicle when fetch assigned vehicles
+
+
+
+status -> comments
+spare parts -> filter
+
+
+purpose of taking vehicle -> vehicle
+odometer
+incident reported -> comments columns
+kms_run: vehicle
+
+duekms-> needed.. 

@@ -1,179 +1,169 @@
 #0 building with "default" instance using docker driver
 
 #1 [api internal] load build definition from Dockerfile
-#1 transferring dockerfile: 967B done
+#1 transferring dockerfile: 992B done
 #1 DONE 0.0s
 
 #2 [api auth] library/node:pull token for registry-1.docker.io
 #2 DONE 0.0s
 
 #3 [api internal] load metadata for docker.io/library/node:20-alpine
-#3 DONE 19.9s
+#3 DONE 8.8s
 
 #4 [api internal] load .dockerignore
-#4 transferring context: 681B done
+#4 transferring context: 705B done
 #4 DONE 0.0s
 
 #5 [api internal] load build context
-#5 transferring context: 87.52kB done
+#5 transferring context: 155.31kB 0.0s done
 #5 DONE 0.0s
 
-#6 [api  1/12] FROM docker.io/library/node:20-alpine@sha256:2cd2a6f4cb37cf8a007d5f1e9aef090ade6b62974c7a274098c390599e8c72b4
+#6 [api 1/9] FROM docker.io/library/node:20-alpine@sha256:2cd2a6f4cb37cf8a007d5f1e9aef090ade6b62974c7a274098c390599e8c72b4
 #6 resolve docker.io/library/node:20-alpine@sha256:2cd2a6f4cb37cf8a007d5f1e9aef090ade6b62974c7a274098c390599e8c72b4 0.0s done
-#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 0B / 3.64MB 0.1s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 0B / 42.55MB 0.1s
-#6 sha256:3e4c58ea8b08c0700d2fd420f469ada7a744a63b1cf198487a20b96c67cef539 0B / 1.26MB 0.1s
+#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 0B / 3.64MB 0.2s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 0B / 42.55MB 0.2s
+#6 sha256:3e4c58ea8b08c0700d2fd420f469ada7a744a63b1cf198487a20b96c67cef539 0B / 1.26MB 0.2s
 #6 sha256:2cd2a6f4cb37cf8a007d5f1e9aef090ade6b62974c7a274098c390599e8c72b4 7.67kB / 7.67kB done
 #6 sha256:af2cdf9c92f5f0cbe53f3a0bbcf2e7d4f4e070487d42427752a631ddf51d7085 1.72kB / 1.72kB done
 #6 sha256:f97665f3387cff72b3ab792b89ae972e2c9f56b4593b062f28d15a69f75c4833 6.18kB / 6.18kB done
-#6 sha256:3e4c58ea8b08c0700d2fd420f469ada7a744a63b1cf198487a20b96c67cef539 1.26MB / 1.26MB 2.0s done
-#6 sha256:f5c4456c2e24264798e3891a92cf4d4371d92403a69385a82a963aec13b87f60 0B / 444B 2.1s
-#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 1.05MB / 3.64MB 2.4s
-#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 2.10MB / 3.64MB 2.5s
-#6 sha256:f5c4456c2e24264798e3891a92cf4d4371d92403a69385a82a963aec13b87f60 444B / 444B 2.5s done
-#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 3.15MB / 3.64MB 3.2s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 4.19MB / 42.55MB 3.4s
-#6 extracting sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0
-#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 3.64MB / 3.64MB 3.6s done
+#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 1.05MB / 3.64MB 1.0s
+#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 2.10MB / 3.64MB 1.4s
+#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 3.15MB / 3.64MB 1.5s
+#6 sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 3.64MB / 3.64MB 1.5s done
+#6 extracting sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 0.1s
+#6 sha256:f5c4456c2e24264798e3891a92cf4d4371d92403a69385a82a963aec13b87f60 0B / 444B 1.6s
 #6 extracting sha256:1f3e46996e2966e4faa5846e56e76e3748b7315e2ded61476c24403d592134f0 0.2s done
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 7.34MB / 42.55MB 4.9s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 10.49MB / 42.55MB 6.5s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 13.63MB / 42.55MB 7.9s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 16.78MB / 42.55MB 9.0s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 19.92MB / 42.55MB 9.8s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 23.07MB / 42.55MB 10.4s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 26.21MB / 42.55MB 11.0s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 29.36MB / 42.55MB 11.9s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 32.51MB / 42.55MB 12.7s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 35.65MB / 42.55MB 13.6s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 38.80MB / 42.55MB 14.7s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 41.94MB / 42.55MB 15.4s
-#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 42.55MB / 42.55MB 15.6s done
+#6 sha256:3e4c58ea8b08c0700d2fd420f469ada7a744a63b1cf198487a20b96c67cef539 1.26MB / 1.26MB 2.0s
+#6 sha256:3e4c58ea8b08c0700d2fd420f469ada7a744a63b1cf198487a20b96c67cef539 1.26MB / 1.26MB 2.0s done
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 3.15MB / 42.55MB 3.2s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 6.29MB / 42.55MB 4.0s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 9.44MB / 42.55MB 5.0s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 12.58MB / 42.55MB 5.9s
+#6 sha256:f5c4456c2e24264798e3891a92cf4d4371d92403a69385a82a963aec13b87f60 444B / 444B 6.1s done
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 15.73MB / 42.55MB 7.0s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 18.87MB / 42.55MB 8.1s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 22.02MB / 42.55MB 9.1s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 25.17MB / 42.55MB 10.3s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 28.31MB / 42.55MB 11.3s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 31.46MB / 42.55MB 12.4s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 34.60MB / 42.55MB 13.4s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 37.75MB / 42.55MB 14.4s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 40.89MB / 42.55MB 15.7s
+#6 sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 42.55MB / 42.55MB 16.4s done
 #6 extracting sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 0.1s
 #6 extracting sha256:280cf903519d879795acbdbfd64db5177ef6594b6be7b328d54a45d322a2614e 0.9s done
 #6 extracting sha256:3e4c58ea8b08c0700d2fd420f469ada7a744a63b1cf198487a20b96c67cef539 0.0s done
 #6 extracting sha256:f5c4456c2e24264798e3891a92cf4d4371d92403a69385a82a963aec13b87f60 done
-#6 DONE 16.7s
+#6 DONE 17.5s
 
-#7 [api  2/12] RUN apk add --no-cache bash postgresql-client
-#7 0.167 fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/main/x86_64/APKINDEX.tar.gz
-#7 3.390 fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/community/x86_64/APKINDEX.tar.gz
-#7 3.956 (1/9) Installing ncurses-terminfo-base (6.5_p20241006-r3)
-#7 4.030 (2/9) Installing libncursesw (6.5_p20241006-r3)
-#7 4.087 (3/9) Installing readline (8.2.13-r0)
-#7 4.162 (4/9) Installing bash (5.2.37-r0)
-#7 4.245 Executing bash-5.2.37-r0.post-install
-#7 4.249 (5/9) Installing postgresql-common (1.2-r1)
-#7 4.306 Executing postgresql-common-1.2-r1.pre-install
-#7 4.326 (6/9) Installing lz4-libs (1.10.0-r0)
-#7 4.395 (7/9) Installing libpq (17.2-r0)
-#7 4.453 (8/9) Installing zstd-libs (1.5.6-r2)
-#7 4.550 (9/9) Installing postgresql17-client (17.2-r0)
-#7 4.707 Executing busybox-1.37.0-r9.trigger
-#7 4.712 Executing postgresql-common-1.2-r1.trigger
-#7 4.715 * Setting postgresql17 as the default version
-#7 4.780 WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.21/main: No such file or directory
-#7 4.780 WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.21/community: No such file or directory
-#7 4.783 OK: 16 MiB in 26 packages
-#7 DONE 5.1s
+#7 [api 2/9] RUN apk add --no-cache bash postgresql-client
+#7 0.162 fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/main/x86_64/APKINDEX.tar.gz
+#7 3.388 fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/community/x86_64/APKINDEX.tar.gz
+#7 4.438 (1/9) Installing ncurses-terminfo-base (6.5_p20241006-r3)
+#7 4.529 (2/9) Installing libncursesw (6.5_p20241006-r3)
+#7 4.618 (3/9) Installing readline (8.2.13-r0)
+#7 4.673 (4/9) Installing bash (5.2.37-r0)
+#7 4.835 Executing bash-5.2.37-r0.post-install
+#7 4.838 (5/9) Installing postgresql-common (1.2-r1)
+#7 4.878 Executing postgresql-common-1.2-r1.pre-install
+#7 4.904 (6/9) Installing lz4-libs (1.10.0-r0)
+#7 4.975 (7/9) Installing libpq (17.2-r0)
+#7 5.068 (8/9) Installing zstd-libs (1.5.6-r2)
+#7 5.209 (9/9) Installing postgresql17-client (17.2-r0)
+#7 5.494 Executing busybox-1.37.0-r9.trigger
+#7 5.500 Executing postgresql-common-1.2-r1.trigger
+#7 5.505 * Setting postgresql17 as the default version
+#7 5.599 WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.21/main: No such file or directory
+#7 5.599 WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.21/community: No such file or directory
+#7 5.604 OK: 16 MiB in 26 packages
+#7 DONE 5.9s
 
-#8 [api  3/12] WORKDIR /app
+#8 [api 3/9] WORKDIR /app
 #8 DONE 0.0s
 
-#9 [api  4/12] COPY package*.json ./
+#9 [api 4/9] COPY package*.json ./
 #9 DONE 0.0s
 
-#10 [api  5/12] RUN npm install
-#10 90.34 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
-#10 91.24 npm warn deprecated superagent@8.1.2: Please upgrade to v9.0.0+ as we have fixed a public vulnerability with formidable dependency. Note that v9.0.0+ requires Node.js v14.18.0+. See https://github.com/ladjs/superagent/pull/1800 for insight. This project is supported and maintained by the team at Forward Email @ https://forwardemail.net
-#10 92.10 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
-#10 92.15 npm warn deprecated gauge@3.0.2: This package is no longer supported.
-#10 93.50 npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
-#10 93.62 npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
-#10 93.99 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
-#10 93.99 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
-#10 94.70 npm warn deprecated xss-clean@0.1.4: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-#10 94.89 npm warn deprecated csurf@1.11.0: Please use another csrf package
-#10 95.17 npm warn deprecated crypto@1.0.1: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto, you should switch to the one that's built-in.
-#10 95.86 npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
-#10 96.20 npm warn deprecated @types/helmet@4.0.0: This is a stub types definition. helmet provides its own type definitions, so you do not need this installed.
-#10 97.37 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
-#10 97.55 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
-#10 97.55 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
-#10 97.63 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
-#10 99.02 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
-#10 115.7 
-#10 115.7 added 842 packages, and audited 843 packages in 2m
-#10 115.7 
-#10 115.7 127 packages are looking for funding
-#10 115.7   run `npm fund` for details
-#10 115.7 
-#10 115.7 2 low severity vulnerabilities
-#10 115.7 
-#10 115.7 To address all issues (including breaking changes), run:
-#10 115.7   npm audit fix --force
-#10 115.7 
-#10 115.7 Run `npm audit` for details.
-#10 115.7 npm notice
-#10 115.7 npm notice New major version of npm available! 10.8.2 -> 11.0.0
-#10 115.7 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.0.0
-#10 115.7 npm notice To update run: npm install -g npm@11.0.0
-#10 115.7 npm notice
-#10 DONE 116.0s
+#10 [api 5/9] RUN npm install --legacy-peer-deps
+#10 89.55 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#10 90.52 npm warn deprecated superagent@8.1.2: Please upgrade to v9.0.0+ as we have fixed a public vulnerability with formidable dependency. Note that v9.0.0+ requires Node.js v14.18.0+. See https://github.com/ladjs/superagent/pull/1800 for insight. This project is supported and maintained by the team at Forward Email @ https://forwardemail.net
+#10 91.00 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#10 91.01 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#10 92.54 npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+#10 92.65 npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+#10 92.97 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#10 92.97 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#10 94.28 npm warn deprecated xss-clean@0.1.4: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+#10 95.67 npm warn deprecated crypto@1.0.1: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto, you should switch to the one that's built-in.
+#10 97.31 npm warn deprecated @types/helmet@4.0.0: This is a stub types definition. helmet provides its own type definitions, so you do not need this installed.
+#10 99.01 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+#10 99.27 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+#10 99.27 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+#10 99.37 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+#10 99.79 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+#10 100.3 npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+#10 116.6 
+#10 116.6 added 849 packages, and audited 850 packages in 2m
+#10 116.6 
+#10 116.6 127 packages are looking for funding
+#10 116.6   run `npm fund` for details
+#10 116.6 
+#10 116.6 2 low severity vulnerabilities
+#10 116.6 
+#10 116.6 To address all issues, run:
+#10 116.6   npm audit fix
+#10 116.6 
+#10 116.6 Run `npm audit` for details.
+#10 116.6 npm notice
+#10 116.6 npm notice New major version of npm available! 10.8.2 -> 11.0.0
+#10 116.6 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.0.0
+#10 116.6 npm notice To update run: npm install -g npm@11.0.0
+#10 116.6 npm notice
+#10 DONE 117.2s
 
-#11 [api  6/12] COPY . .
-#11 DONE 0.0s
+#11 [api 6/9] COPY . .
+#11 DONE 0.1s
 
-#12 [api  7/12] RUN ls -alh /app
-#12 0.191 total 476K   
-#12 0.191 drwxr-xr-x    1 root     root        4.0K Jan 25 15:57 .
-#12 0.191 drwxr-xr-x    1 root     root        4.0K Jan 25 15:59 ..
-#12 0.191 -rw-rw-r--    1 root     root         663 Jan 25 09:44 .eslintrc.js
-#12 0.191 -rw-rw-r--    1 root     root          51 Jan 25 09:44 .prettierrc
-#12 0.191 -rw-rw-r--    1 root     root        7.4K Jan 25 09:52 README.md
-#12 0.191 -rwxrw-r--    1 root     root        2.4K Jan 25 09:52 create-pod.sh
-#12 0.191 -rwxrw-r--    1 root     root         297 Jan 25 09:44 destroy-pod.sh
-#12 0.191 -rwxrw-r--    1 root     root        1.6K Jan 25 15:55 entrypoint.sh
-#12 0.191 drwxrwxr-x    2 root     root        4.0K Jan 25 09:44 images
-#12 0.191 -rw-rw-r--    1 root     root         325 Jan 25 15:57 log.txt
-#12 0.191 -rw-rw-r--    1 root     root         171 Jan 25 09:44 nest-cli.json
-#12 0.191 drwxr-xr-x  572 root     root       20.0K Jan 25 15:59 node_modules
-#12 0.191 -rw-r--r--    1 root     root      386.0K Jan 25 15:59 package-lock.json
-#12 0.191 -rw-rw-r--    1 root     root        3.1K Jan 25 11:07 package.json
-#12 0.191 drwxrwxr-x   10 root     root        4.0K Jan 25 13:22 src
-#12 0.191 drwxrwxr-x    2 root     root        4.0K Jan 25 09:44 test
-#12 0.191 -rw-rw-r--    1 root     root          97 Jan 25 09:44 tsconfig.build.json
-#12 0.191 -rw-rw-r--    1 root     root         546 Jan 25 09:44 tsconfig.json
+#12 [api 7/9] RUN ls -alh /app
+#12 0.215 total 488K   
+#12 0.215 drwxr-xr-x    1 root     root        4.0K Jan 26 17:34 .
+#12 0.215 drwxr-xr-x    1 root     root        4.0K Jan 26 17:36 ..
+#12 0.215 -rw-rw-r--    1 root     root         663 Jan 25 09:44 .eslintrc.js
+#12 0.215 drwxrwxr-x    3 root     root        4.0K Jan 26 09:49 .github
+#12 0.215 -rw-rw-r--    1 root     root          51 Jan 25 09:44 .prettierrc
+#12 0.215 -rw-rw-r--    1 root     root        1.7K Jan 25 18:03 README.md
+#12 0.215 -rwxrwxr-x    1 root     root        2.4K Jan 25 18:03 create-pod.sh
+#12 0.215 -rwxrw-r--    1 root     root         297 Jan 25 09:44 destroy-pod.sh
+#12 0.215 -rwxrwxr-x    1 root     root        1.6K Jan 26 16:53 entrypoint.sh
+#12 0.215 -rw-rw-r--    1 root     root         304 Jan 25 18:03 example.env
+#12 0.215 drwxrwxr-x    2 root     root        4.0K Jan 26 09:49 images
+#12 0.215 -rw-rw-r--    1 root     root         324 Jan 26 17:34 log.txt
+#12 0.215 -rw-rw-r--    1 root     root         171 Jan 25 09:44 nest-cli.json
+#12 0.215 drwxr-xr-x  576 root     root       20.0K Jan 26 17:36 node_modules
+#12 0.215 -rw-r--r--    1 root     root      389.5K Jan 26 17:36 package-lock.json
+#12 0.215 -rw-rw-r--    1 root     root        3.1K Jan 26 13:19 package.json
+#12 0.215 -rw-rw-r--    1 root     root         512 Jan 26 17:14 pending.txt
+#12 0.215 drwxrwxr-x   11 root     root        4.0K Jan 26 09:49 src
+#12 0.215 drwxrwxr-x    2 root     root        4.0K Jan 25 09:44 test
+#12 0.215 -rw-rw-r--    1 root     root          97 Jan 25 09:44 tsconfig.build.json
+#12 0.215 -rw-rw-r--    1 root     root         546 Jan 25 09:44 tsconfig.json
 #12 DONE 0.2s
 
-#13 [api  8/12] RUN npm run build
-#13 0.349 
-#13 0.349 > url-shortner-nest@0.0.1 build
-#13 0.349 > nest build
-#13 0.349 
-#13 DONE 4.8s
+#13 [api 8/9] COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+#13 DONE 0.0s
 
-#14 [api  9/12] RUN rm -rf /app/src/migrations
-#14 DONE 0.4s
+#14 [api 9/9] RUN chmod +x /usr/local/bin/entrypoint.sh
+#14 DONE 0.2s
 
-#15 [api 10/12] RUN mkdir /app/src/migrations
-#15 DONE 0.4s
+#15 [api] exporting to image
+#15 exporting layers
+#15 exporting layers 3.3s done
+#15 writing image sha256:29cf37db4e6fdaec3b91836a317efc14b886cf7cd353eac9ea74a63cc8283534 done
+#15 naming to docker.io/library/vehicle-system-api done
+#15 DONE 3.4s
 
-#16 [api 11/12] COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-#16 DONE 0.2s
-
-#17 [api 12/12] RUN chmod +x /usr/local/bin/entrypoint.sh
-#17 DONE 0.5s
-
-#18 [api] exporting to image
-#18 exporting layers
-#18 exporting layers 5.3s done
-#18 writing image sha256:4fd63895c86f4bd5c26f405fada3489b487bccea5f191c85c2cfd85915468e78 0.0s done
-#18 naming to docker.io/library/vehicle-system-api 0.0s done
-#18 DONE 5.4s
-
-#19 [api] resolving provenance for metadata file
-#19 DONE 0.0s
+#16 [api] resolving provenance for metadata file
+#16 DONE 0.0s
 Attaching to api-1, postgres-1
 postgres-1  | 
 postgres-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
@@ -183,29 +173,29 @@ api-1       | 5432
 api-1       | flanker
 api-1       | vehicles
 api-1       | Waiting for the database to be ready...
-api-1       | Waiting for the database to be ready...
 api-1       | postgres:5432 - accepting connections
 api-1       | Database is ready!
 api-1       | Generating migrations...
 api-1       | 
-api-1       | > url-shortner-nest@0.0.1 migration:generate
+api-1       | > vehicle-system@0.0.1 migration:generate
 api-1       | > npm run typeorm -- -d ./src/config/typeorm.ts migration:generate ./src/migrations/$npm_config_name
 api-1       | 
 api-1       | 
-api-1       | > url-shortner-nest@0.0.1 typeorm
+api-1       | > vehicle-system@0.0.1 typeorm
 api-1       | > ts-node ./node_modules/typeorm/cli -d ./src/config/typeorm.ts migration:generate ./src/migrations/vehicleMigrations
 api-1       | 
 api-1       | No changes in database schema were found - cannot generate a migration. To create a new empty migration use "typeorm migration:create" command
-api-1       | total 8
-api-1       | drwxr-xr-x    2 root     root          4096 Jan 25 15:59 .
-api-1       | drwxrwxr-x    1 root     root          4096 Jan 25 15:59 ..
+api-1       | 
+api-1       | > vehicle-system@0.0.1 build
+api-1       | > nest build
+api-1       | 
 api-1       | Running migrations...
 api-1       | 
-api-1       | > url-shortner-nest@0.0.1 migration:run
+api-1       | > vehicle-system@0.0.1 migration:run
 api-1       | > npm run typeorm migration:run -- -d ./src/config/typeorm.ts
 api-1       | 
 api-1       | 
-api-1       | > url-shortner-nest@0.0.1 typeorm
+api-1       | > vehicle-system@0.0.1 typeorm
 api-1       | > ts-node ./node_modules/typeorm/cli migration:run -d ./src/config/typeorm.ts
 api-1       | 
 api-1       | query: SELECT * FROM current_schema()
@@ -216,40 +206,45 @@ api-1       | No migrations are pending
 api-1       | Creating admin user...
 api-1       | Starting the server...
 api-1       | 
-api-1       | > url-shortner-nest@0.0.1 start:dev
+api-1       | > vehicle-system@0.0.1 start:dev
 api-1       | > nest start --watch
 api-1       | 
-api-1       | [2J[3J[H[[90m4:00:11 PM[0m] Starting compilation in watch mode...
+api-1       | [2J[3J[H[[90m5:36:57 PM[0m] Starting compilation in watch mode...
 api-1       | 
-api-1       | [[90m4:00:15 PM[0m] Found 0 errors. Watching for file changes.
+api-1       | [[90m5:37:00 PM[0m] Found 0 errors. Watching for file changes.
 api-1       | 
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +33ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDiscoveryModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mScheduleModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mScheduleModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +51ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVehicleModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDriversModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +20ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +2ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVehicleController {/url}:[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/url, GET} route[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/url, POST} route[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDriversController {/drivers}:[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/drivers, GET} route[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/drivers, POST} route[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 106  - [39m01/25/2025, 4:00:16 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +9ms[39m
-api-1       | Request path: /auth/login, and method: POST
-api-1       | Request path: /auth/login, and method: POST
-api-1       | Request path: /url, and method: GET
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +29ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +2ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDiscoveryModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mScheduleModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mScheduleModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +88ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVehicleModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDriversModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVehicleAssignmentModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/vehicles-api}:[39m[38;5;3m +37ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api, GET} route[39m[38;5;3m +5ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/vehicles-api/auth}:[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/auth/register, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/auth/login, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVehicleController {/vehicles-api/vehicle}:[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicle, GET} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicle/add, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDriversController {/vehicles-api/driver}:[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver, GET} route[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver/add, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver/:id, GET} route[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVehicleAssignmentController {/vehicles-api/vehicleAssignment}:[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment, GET} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment/assign, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment/unassign/:id, PATCH} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 124  - [39m01/26/2025, 5:37:02 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +13ms[39m

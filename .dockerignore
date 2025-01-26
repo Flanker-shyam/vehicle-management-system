@@ -8,9 +8,9 @@ node_modules/
 # Ignore local build directories
 dist/
 build/
-/dist
-/src/migrations
-src/migrations/
+/dist/
+# Ignore migrations folder inside src
+/src/migrations/
 
 
 # Ignore environment variable files
