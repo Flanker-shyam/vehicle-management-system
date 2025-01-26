@@ -42,7 +42,7 @@ export class VehicleAssignmentService {
       return vehicleAssignment.id;
     } catch (err) {
       console.log('Error occured while assigning vehicle', err);
-      throw err;
+      throw new Error(`Internal server error: ${err}`);
     }
   }
 
@@ -52,7 +52,7 @@ export class VehicleAssignmentService {
       return assignments;
     } catch (err) {
       console.log('Error occured while fetching all assignments', err);
-      throw err;
+      throw new Error(`Internal server error: ${err}`);
     }
   }
 }

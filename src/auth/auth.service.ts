@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Auth } from './auth.entity';
@@ -25,7 +29,9 @@ export class AuthService {
         where: { username: userData.username },
       });
       if (user) {
-        throw new Error(`User already exist`);
+        throw new ConflictException(
+          `User with this email or username already exists`,
+        );
       } else {
         const newUser = new Auth();
         newUser.name = userData.name;
@@ -40,7 +46,7 @@ export class AuthService {
         } as RegsiterResponseDto;
       }
     } catch (err) {
-      throw new Error(`Failed to register user: ${err.message}`);
+      throw new Error(`Internal server error: ${err}`);
     }
   }
 
@@ -70,7 +76,7 @@ export class AuthService {
         throw new UnauthorizedException('User not found');
       }
     } catch (err) {
-      throw new UnauthorizedException(`Failed to login user: ${err.message}`);
+      throw new Error(`Internal server error: ${err}`);
     }
   }
 }

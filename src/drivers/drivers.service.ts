@@ -18,7 +18,7 @@ export class DriversService {
       return drivers;
     } catch (err) {
       console.log('Error occured while fetching all drivers', err);
-      throw err;
+      throw new Error(`Internal server error: ${err}`);
     }
   }
 
@@ -36,7 +36,7 @@ export class DriversService {
       return driver;
     } catch (err) {
       console.log('Error occured while adding driver', err);
-      throw err;
+      throw new Error(`Internal server error: ${err}`);
     }
   }
 
@@ -46,7 +46,7 @@ export class DriversService {
       return driver;
     } catch (err) {
       console.log('Error occured while fetching driver by id', err);
-      throw err;
+      throw new Error(`Internal server error: ${err}`);
     }
   }
 }

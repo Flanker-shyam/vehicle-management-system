@@ -3,9 +3,20 @@ import { AppModule } from './app.module';
 import { NotFoundExceptionFilter } from './filters/not-found-exception.fllter';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const config = new DocumentBuilder()
+    .setTitle('Vehicle System API')
+    .setDescription('Routes to manage vehicles')
+    .setVersion('1.0')
+    .addTag('vehicles')
+    .build();
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, documentFactory);
+
   app.useGlobalFilters(new NotFoundExceptionFilter());
   app.enableCors();
   app.use(

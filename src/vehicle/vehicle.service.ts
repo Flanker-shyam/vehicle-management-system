@@ -42,7 +42,7 @@ export class VehicleService {
       return vehicles;
     } catch (err) {
       console.log('Error occurred while fetching all vehicles', err);
-      throw err;
+      throw new Error(`Internal server error: ${err}`);
     }
   }
   async addVehicle(vehicleData: AddVehicleRequestDto) {
@@ -60,7 +60,7 @@ export class VehicleService {
       return vehicle;
     } catch (err) {
       console.log('Error occured while adding vehicle', err);
-      throw err;
+      throw new Error(`Internal server error: ${err}`);
     }
   }
 }
