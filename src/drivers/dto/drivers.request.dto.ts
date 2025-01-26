@@ -1,4 +1,4 @@
-export class DriversDto {
+export class DriversRequestDto {
   service_number: string;
   rank: string;
   first_name: string;

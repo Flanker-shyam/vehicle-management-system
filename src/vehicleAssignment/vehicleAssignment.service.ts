@@ -36,7 +36,7 @@ export class VehicleAssignmentService {
       throw new Error('Driver not found');
     }
     vehicleAssignment.driver = driver;
-    vehicleAssignment.isActive = assignmentData.isActive;
+    vehicleAssignment.is_active = assignmentData.isActive;
     try {
       await this.vehicleAssignmentRepository.save(vehicleAssignment);
       return vehicleAssignment.id;

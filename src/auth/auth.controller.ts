@@ -6,7 +6,7 @@ import {
   RegisterDto,
   RegsiterResponseDto,
 } from './auth.dto';
-import { AuthMiddleware } from 'src/middlewares/auth.middleware';
+import { AuthMiddleware } from '../middlewares/auth.middleware';
 
 @Controller('auth')
 export class AuthController {

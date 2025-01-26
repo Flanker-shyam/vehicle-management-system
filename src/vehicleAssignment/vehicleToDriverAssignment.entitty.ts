@@ -24,14 +24,14 @@ export class VehicleAssignment {
   vehicle: Vehicles;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  assignmentDate: Date;
+  assignment_date: Date;
 
   @Column({ type: 'boolean', default: false })
-  isActive: boolean;
+  is_active: boolean;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  updatedAt: Date;
+  updated_at: Date;
 }

@@ -24,15 +24,18 @@ export class VehicleService {
       }
 
       if (currentClass) {
-        query.andWhere('vehicles.currentClass = :currentClass', {
+        query.andWhere('vehicles.current_class = :current_class', {
           currentClass,
         });
       }
 
       if (sparePartRequested) {
-        query.andWhere('vehicles.sparePartRequested = :sparePartRequested', {
-          sparePartRequested,
-        });
+        query.andWhere(
+          'vehicles.spare_part_requested = :spare_part_requested',
+          {
+            sparePartRequested,
+          },
+        );
       }
 
       const vehicles = await query.getMany();
@@ -44,14 +47,14 @@ export class VehicleService {
   }
   async addVehicle(vehicleData: AddVehicleRequestDto) {
     const vehicle = new Vehicles();
-    vehicle.vehicleNumber = vehicleData.vehicleNumber;
+    vehicle.vehicle_number = vehicleData.vehicleNumber;
     vehicle.category = vehicleData.category;
     vehicle.status = vehicleData.status;
-    vehicle.classDueDate = vehicleData.classDueDate;
-    vehicle.currentClass = vehicleData.currentClass;
-    vehicle.ododmeterReading = vehicleData.ododmeterReading;
-    vehicle.pendingMaintainence = vehicleData.pendingMaintainence;
-    vehicle.sparePartRequested = vehicleData.sparePartRequested;
+    vehicle.class_due_date = vehicleData.classDueDate;
+    vehicle.current_class = vehicleData.currentClass;
+    vehicle.ododmeter_reading = vehicleData.ododmeterReading;
+    vehicle.pending_maintainence = vehicleData.pendingMaintainence;
+    vehicle.spare_part_requested = vehicleData.sparePartRequested;
     try {
       await this.vehicleRepository.save(vehicle);
       return vehicle;

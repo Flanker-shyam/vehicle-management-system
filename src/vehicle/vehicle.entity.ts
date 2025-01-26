@@ -5,6 +5,7 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
 
@@ -14,34 +15,37 @@ export class Vehicles {
   id: number;
 
   @Column({ type: 'text' })
-  vehicleNumber: string;
+  vehicle_number: string;
 
   @Column({ type: 'text' })
   category: string;
 
   @Column({ type: 'float' })
-  ododmeterReading: number;
+  ododmeter_reading: number;
 
   @Column({ type: 'text', nullable: true })
-  assignedDriver: string | null;
+  assigned_driver: string | null;
 
   @Column({ type: 'text' })
-  currentClass: number;
+  current_class: number;
 
   @Column({ type: 'timestamp' })
-  classDueDate: Date;
+  class_due_date: Date;
 
   @Column({ type: 'boolean' })
-  pendingMaintainence: boolean;
+  pending_maintainence: boolean;
 
   @Column({ type: 'text' })
-  sparePartRequested: string;
+  spare_part_requested: string;
 
   @Column({ type: 'text' })
   status: string;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  updated_at: Date;
 
   @OneToMany(() => VehicleAssignment, (assignment) => assignment.vehicle)
   @Exclude()
