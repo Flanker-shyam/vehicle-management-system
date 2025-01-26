@@ -6,14 +6,23 @@ import {
   RegisterDto,
   RegsiterResponseDto,
 } from './auth.dto';
-import { AuthMiddleware } from '../middlewares/auth.middleware';
+import { AdminAuthMiddleware } from '../middlewares/admin-auth.middleware';
+import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('/auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  @UseGuards(AuthMiddleware)
+  @ApiBearerAuth()
+  @ApiBody({ type: RegisterDto, description: 'only admin can register users' })
+  @ApiResponse({
+    type: RegsiterResponseDto,
+    status: 201,
+    description: 'User registered successfully',
+  })
+  @UseGuards(AdminAuthMiddleware)
   async registerUser(
     @Body() userData: RegisterDto,
   ): Promise<RegsiterResponseDto> {
@@ -21,6 +30,12 @@ export class AuthController {
   }
 
   @Post('login')
+  @ApiBody({ type: LoginDto })
+  @ApiResponse({
+    type: LoginResponseDto,
+    status: 200,
+    description: 'Login successful',
+  })
   async loginUser(@Body() userData: LoginDto): Promise<LoginResponseDto> {
     return this.authService.loginUser(userData);
   }

@@ -9,14 +9,17 @@ import { connectionSource } from './config/typeorm';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const appCode = 'vehicles-api';
+  app.setGlobalPrefix(appCode);
   const config = new DocumentBuilder()
     .setTitle('Vehicle System API')
     .setDescription('Routes to manage vehicles')
     .setVersion('1.0')
     .addTag('vehicles')
+    .addBearerAuth()
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+  SwaggerModule.setup(`${appCode}/swagger`, app, documentFactory);
 
   app.useGlobalFilters(new NotFoundExceptionFilter());
   app.enableCors();

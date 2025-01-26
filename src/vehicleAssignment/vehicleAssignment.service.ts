@@ -90,11 +90,43 @@ export class VehicleAssignmentService {
     }
   }
 
-  async submitVehicle() {}
+  async submitVehicle(assignmentId: number): Promise<number> {
+    const queryRunner = connectionSource.createQueryRunner();
+    try {
+      await queryRunner.startTransaction();
+      const assignment = await this.vehicleAssignmentRepository.findOne({
+        where: { id: assignmentId },
+      });
+      if (!assignment) {
+        throw new NotFoundException(`Assignment not found!`);
+      } else {
+        if (!assignment.is_active) {
+          throw new NotFoundException(`Assignment is not active`);
+        } else {
+          const vehicle = await queryRunner.manager.findOne(Vehicles, {
+            where: { id: assignment.vehicle.id },
+          });
+          const driver = await queryRunner.manager.findOne(Drivers, {
+            where: { id: assignment.driver.id },
+          });
+
+          assignment.is_active = false;
+          vehicle.assigned_driver = null;
+          driver.assigned_vehicle = null;
+          await Promise.all([
+            queryRunner.manager.save(assignment),
+            queryRunner.manager.save(vehicle),
+            queryRunner.manager.save(driver),
+          ]);
+          await queryRunner.commitTransaction();
+          return assignmentId;
+        }
+      }
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+      throw err;
+    } finally {
+      await queryRunner.release();
+    }
+  }
 }
-
-//remove assigned veh from dri
-//remove assigned dri from vehi
-//mark assignment active to false
-
-//update vehicle details

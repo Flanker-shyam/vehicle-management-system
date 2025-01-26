@@ -13,7 +13,7 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     response.status(404).json({
       statusCode: 404,
-      message: 'URL not found',
+      message: exception.message || 'not found',
     });
   }
 }

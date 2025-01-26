@@ -6,7 +6,7 @@ import { VehicleAssignment } from './vehicleToDriverAssignment.entitty';
 import { Vehicles } from '../vehicle/vehicle.entity';
 import { Drivers } from '../drivers/drivers.entity';
 import { VehicleAssignmentService } from './vehicleAssignment.service';
-import { AuthMiddleware } from 'src/middlewares/auth.middleware';
+import { AdminAuthMiddleware } from 'src/middlewares/admin-auth.middleware';
 import { JwtService } from '@nestjs/jwt';
 
 @Module({
@@ -19,6 +19,6 @@ import { JwtService } from '@nestjs/jwt';
 })
 export class VehicleAssignmentModule {
   configure(consume: MiddlewareConsumer) {
-    consume.apply(AuthMiddleware).forRoutes(VehicleAssignmentController);
+    consume.apply(AdminAuthMiddleware).forRoutes(VehicleAssignmentController);
   }
 }

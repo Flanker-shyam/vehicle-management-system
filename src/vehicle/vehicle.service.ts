@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Vehicles } from './vehicle.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AddVehicleRequestDto } from './dto/vehicle.request.dto';
+import { getVehicleResponseDto } from './dto/vehicle.response.dto';
 
 @Injectable()
 export class VehicleService {
@@ -47,7 +48,9 @@ export class VehicleService {
       );
     }
   }
-  async addVehicle(vehicleData: AddVehicleRequestDto) {
+  async addVehicle(
+    vehicleData: AddVehicleRequestDto,
+  ): Promise<getVehicleResponseDto> {
     const vehicle = new Vehicles();
     vehicle.vehicle_number = vehicleData.vehicleNumber;
     vehicle.category = vehicleData.category;

@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Drivers } from './drivers.entity';
@@ -24,7 +28,7 @@ export class DriversService {
     }
   }
 
-  async addDriver(driverData: DriversRequestDto) {
+  async addDriver(driverData: DriversRequestDto): Promise<DriversResponseDto> {
     const driver = new Drivers();
     driver.service_number = driverData.service_number;
     driver.rank = driverData.rank;
@@ -47,12 +51,13 @@ export class DriversService {
   async getDriverById(id: number): Promise<DriversResponseDto> {
     try {
       const driver = await this.driversRepository.findOne({ where: { id } });
+      if (!driver) {
+        throw new NotFoundException(`Driver not found`);
+      }
       return driver;
     } catch (err) {
       console.log('Error occured while fetching driver by id', err);
-      throw new InternalServerErrorException(
-        `Internal server error: ${err.message}`,
-      );
+      throw err;
     }
   }
 }

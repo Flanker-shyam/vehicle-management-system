@@ -4,7 +4,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { Auth } from './auth.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthMiddleware } from 'src/middlewares/auth.middleware';
+import { AdminAuthMiddleware } from 'src/middlewares/admin-auth.middleware';
 
 @Module({
   imports: [
@@ -19,6 +19,6 @@ import { AuthMiddleware } from 'src/middlewares/auth.middleware';
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('auth/register');
+    consumer.apply(AdminAuthMiddleware).forRoutes('auth/register');
   }
 }
