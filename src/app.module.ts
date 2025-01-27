@@ -10,13 +10,14 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { DriversModule } from './drivers/drivers.module';
 import { VehicleAssignmentModule } from './vehicleAssignment/vehicleAssignment.module';
-import { TasksService } from './tasks/tasks.service';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
     AuthModule,
     VehicleModule,
     DriversModule,
+    TasksModule,
     VehicleAssignmentModule,
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
@@ -30,7 +31,7 @@ import { TasksService } from './tasks/tasks.service';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, TasksService],
+  providers: [AppService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
