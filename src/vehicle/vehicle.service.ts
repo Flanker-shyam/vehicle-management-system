@@ -94,14 +94,13 @@ export class VehicleService {
       if (!vehicle) {
         throw new NotFoundException('Vehicle not found');
       }
-      if (vehicleData.pendingMaintainence) {
+      if ('pendingMaintainence' in vehicleData) {
         vehicle.pending_maintainence = vehicleData.pendingMaintainence;
       }
       if (vehicleData.comments) {
         vehicle.comments = vehicleData.comments;
       }
       if (vehicleData.ododmeterReading) {
-        vehicle.ododmeter_reading = vehicleData.ododmeterReading;
         const oldReadingLimit = findUpperBound(
           this.ododMeterLimits,
           vehicle.ododmeter_reading,
@@ -110,13 +109,13 @@ export class VehicleService {
           this.ododMeterLimits,
           vehicleData.ododmeterReading,
         );
-
         if (
           oldReadingLimit < newReadingLimit ||
           this.ododMeterLimits.includes(vehicleData.ododmeterReading)
         ) {
           vehicle.pending_maintainence = true;
         }
+        vehicle.ododmeter_reading = vehicleData.ododmeterReading;
       }
       if (vehicleData.sparePartRequested) {
         vehicle.spare_part_requested = vehicleData.sparePartRequested;
