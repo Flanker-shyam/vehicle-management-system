@@ -1,7 +1,10 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Param } from '@nestjs/common';
 import { VehicleService } from './vehicle.service';
 import { getVehicleResponseDto } from './dto/vehicle.response.dto';
-import { AddVehicleRequestDto } from './dto/vehicle.request.dto';
+import {
+  AddVehicleRequestDto,
+  UpdateVehicleRequestDto,
+} from './dto/vehicle.request.dto';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -48,5 +51,26 @@ export class VehicleController {
     @Body() vehicleData: AddVehicleRequestDto,
   ): Promise<getVehicleResponseDto> {
     return await this.vehicleService.addVehicle(vehicleData);
+  }
+
+  @Post('update/:id')
+  @ApiBody({ type: UpdateVehicleRequestDto })
+  @ApiResponse({
+    type: getVehicleResponseDto,
+    description: 'success',
+    status: 200,
+  })
+  async updateVehicle(
+    @Param('id') id: string,
+    @Body() updateDetails: UpdateVehicleRequestDto,
+  ): Promise<getVehicleResponseDto> {
+    try {
+      return await this.vehicleService.updateVehicleDetails(
+        Number(id),
+        updateDetails,
+      );
+    } catch (err) {
+      throw err;
+    }
   }
 }
