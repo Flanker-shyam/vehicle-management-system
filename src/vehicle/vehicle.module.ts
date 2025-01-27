@@ -1,12 +1,11 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
 import { Vehicles } from './vehicle.entity';
 import { VehicleController } from './vehicle.controller';
 import { VehicleService } from './vehicle.service';
 import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
-import { AdminAuthMiddleware } from '../middlewares/admin-auth.middleware';
 import { JwtService } from '@nestjs/jwt';
+import { Module } from '@nestjs/common';
 
 @Module({
   imports: [
@@ -16,8 +15,4 @@ import { JwtService } from '@nestjs/jwt';
   controllers: [VehicleController],
   providers: [VehicleService, JwtService], // Remove AuthEntity from providers
 })
-export class VehicleModule {
-  configure(consume: MiddlewareConsumer) {
-    consume.apply(AdminAuthMiddleware).forRoutes(VehicleController);
-  }
-}
+export class VehicleModule {}

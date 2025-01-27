@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Query, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Query,
+  Param,
+  UseGuards,
+  Patch,
+} from '@nestjs/common';
 import { VehicleService } from './vehicle.service';
 import { getVehicleResponseDto } from './dto/vehicle.response.dto';
 import {
@@ -12,6 +21,8 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { AdminAuthMiddleware } from 'src/middlewares/admin-auth.middleware';
+import { UserAuthMiddleware } from 'src/middlewares/user-auth.middleware';
 
 @ApiTags('/vehicle')
 @ApiBearerAuth()
@@ -19,6 +30,7 @@ import {
 export class VehicleController {
   constructor(private readonly vehicleService: VehicleService) {}
 
+  @UseGuards(AdminAuthMiddleware)
   @Get()
   @ApiResponse({
     status: 200,
@@ -40,6 +52,7 @@ export class VehicleController {
     );
   }
 
+  @UseGuards(AdminAuthMiddleware)
   @Post('add')
   @ApiBody({ type: AddVehicleRequestDto })
   @ApiResponse({
@@ -53,7 +66,8 @@ export class VehicleController {
     return await this.vehicleService.addVehicle(vehicleData);
   }
 
-  @Post('update/:id')
+  @UseGuards(UserAuthMiddleware)
+  @Patch('update/:id')
   @ApiBody({ type: UpdateVehicleRequestDto })
   @ApiResponse({
     type: getVehicleResponseDto,
