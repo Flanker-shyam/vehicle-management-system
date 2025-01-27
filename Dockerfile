@@ -13,6 +13,8 @@ COPY package*.json ./
 # Install project dependencies
 RUN npm install --legacy-peer-deps
 
+RUN npm install -g ts-node --legacy-peer-deps
+
 # Copy the rest of the application code and migration script
 COPY . .
 

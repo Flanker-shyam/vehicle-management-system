@@ -1,22 +1,17 @@
 #! /bin/bash
 
-echo $DATABASE_HOST
-echo $DATABASE_PORT
-echo $DATABASE_USERNAME
-echo $DATABASE_NAME
-
 # Wait for the database to be ready
 echo 'Waiting for the database to be ready...'
 until pg_isready -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d $DATABASE_NAME | grep 'accepting connections'; do
-  echo 'Waiting for the database to be ready...'
-  sleep 2
+    echo 'Waiting for the database to be ready...'
+    sleep 2
 done
 
 echo 'Database is ready!'
 
 #check and create database if do not exist
 PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d "postgres" -c "SELECT 1 FROM pg_database WHERE datname = '$DATABASE_NAME'" | grep -q 1 || \
-    PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d "postgres" -c "CREATE DATABASE $DATABASE_NAME";
+PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d "postgres" -c "CREATE DATABASE $DATABASE_NAME";
 
 #Generate Migrations
 echo 'Generating migrations...'
@@ -31,6 +26,10 @@ npm run build
 echo 'Running migrations...'
 npm run migration:run
 
+#seed data
+echo 'Seeding data...'
+ts-node src/seed.ts
+
 # > /dev/null 2>&1/
 
 #install bcrypt
@@ -39,7 +38,7 @@ npm run migration:run
 #Create Admin user if not exist
 echo 'Creating admin user...'
 PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d $DATABASE_NAME -c "SELECT 1 FROM auth WHERE username = '$ADMIN_USERNAME'" | grep -q 1 || \
-    PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d $DATABASE_NAME -c "INSERT INTO auth (name, username, password, is_admin) VALUES ('$ADMIN_NAME', '$ADMIN_USERNAME', '$ADMIN_PASSWORD', 'true'::boolean)";
+PGPASSWORD=$DATABASE_PASSWORD psql -h $DATABASE_HOST -p $DATABASE_PORT -U $DATABASE_USERNAME -d $DATABASE_NAME -c "INSERT INTO auth (name, username, password, is_admin) VALUES ('$ADMIN_NAME', '$ADMIN_USERNAME', '$ADMIN_PASSWORD', 'true'::boolean)";
 
 # Start the server
 echo 'Starting the server...'
