@@ -35,11 +35,11 @@ export class Vehicles {
   @Column({ type: 'boolean' })
   pending_maintainence: boolean;
 
-  @Column({ type: 'text' })
+  @Column('text', { array: true })
   spare_part_requested: string[];
 
   @Column({ type: 'text' })
-  status: string;
+  comments: string;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

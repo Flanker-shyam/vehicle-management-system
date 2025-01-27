@@ -1,5 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+class Vehicle {
+  @ApiProperty({ description: 'ID of the vehicle', example: 1, type: Number })
+  id: number;
+
+  @ApiProperty({
+    description: 'vehicle number',
+    example: 'HX-123',
+    type: String,
+  })
+  number: string;
+}
+
+class Driver {
+  @ApiProperty({ description: 'ID of the driver', example: 1, type: Number })
+  id: number;
+
+  @ApiProperty({
+    description: 'Driver name',
+    example: 'John Doe',
+    type: String,
+  })
+  name: string;
+}
+
 export class VehicleAssignmentResponseDto {
   @ApiProperty({
     description: 'ID of the Assignment',
@@ -8,11 +32,19 @@ export class VehicleAssignmentResponseDto {
   })
   id: number;
 
-  @ApiProperty({ description: 'ID of the vehicle', example: 1, type: Number })
-  vehicleId: number;
+  @ApiProperty({
+    description: 'vehicle',
+    example: { id: 1, number: 'HX-123' },
+    type: Vehicle,
+  })
+  vehicle: Vehicle;
 
-  @ApiProperty({ description: 'ID of the driver', example: 1, type: Number })
-  driverId: number;
+  @ApiProperty({
+    description: 'driver',
+    example: { id: 1, name: 'John Doe' },
+    type: Driver,
+  })
+  driver: Driver;
 
   @ApiProperty({
     description: 'Status of the assignment',
@@ -27,7 +59,7 @@ export class VehicleAssignmentResponseDto {
     type: String,
     format: 'date-time',
   })
-  assignment_date: Date;
+  assignmentDate: Date;
 
   @ApiProperty({
     description: 'Date when the record was created',
@@ -35,7 +67,7 @@ export class VehicleAssignmentResponseDto {
     type: String,
     format: 'date-time',
   })
-  created_at: Date;
+  createdAt: Date;
 
   @ApiProperty({
     description: 'Date when the record was last updated',
@@ -43,5 +75,5 @@ export class VehicleAssignmentResponseDto {
     type: String,
     format: 'date-time',
   })
-  updated_at: Date;
+  updatedAt: Date;
 }

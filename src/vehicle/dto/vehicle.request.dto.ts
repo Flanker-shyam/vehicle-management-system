@@ -51,9 +51,46 @@ export class AddVehicleRequestDto {
   })
   sparePartRequested: string[];
   @ApiProperty({
-    description: 'Current status of vehicle',
-    type: String,
+    description: 'Comments',
+    type: Array,
     example: 'string',
   })
-  status: string;
+  comments: string;
+}
+
+export class UpdateVehicleRequestDto {
+  @ApiProperty({
+    description: 'odometer readings of vehicle',
+    type: Number,
+    example: 1245,
+  })
+  ododmeterReading: number;
+
+  @ApiProperty({
+    description: 'Due date for service',
+    type: Date,
+    example: '2024-02-03 00:00:00.000',
+  })
+  classDueDate: Date;
+
+  @ApiProperty({
+    description: 'spare parts requested',
+    type: Array,
+    example: ['oil'],
+  })
+  sparePartRequested: string[];
+
+  @ApiProperty({
+    description: 'if pending maintainance',
+    type: Boolean,
+    example: false,
+  })
+  pendingMaintainence: boolean;
+
+  @ApiProperty({
+    description: 'Comments',
+    type: Array,
+    example: 'string',
+  })
+  comments: string;
 }

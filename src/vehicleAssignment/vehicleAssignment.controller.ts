@@ -27,7 +27,7 @@ export class VehicleAssignmentController {
     description: 'success',
     type: [VehicleAssignmentResponseDto],
   })
-  async getAllAssignments() {
+  async getAllAssignments(): Promise<VehicleAssignmentResponseDto[]> {
     return await this.vehicleAssignmentService.getAllAssignments();
   }
 

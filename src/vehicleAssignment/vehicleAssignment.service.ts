@@ -11,6 +11,7 @@ import { Vehicles } from '../vehicle/vehicle.entity';
 import { Drivers } from '../drivers/drivers.entity';
 import { VehicleAssignmentRequestDto } from './dto/vehicleAssignment.request.dto';
 import { connectionSource } from '../config/typeorm';
+import { VehicleAssignmentResponseDto } from './dto/vehicleAssignment.response.dto';
 
 @Injectable()
 export class VehicleAssignmentService {
@@ -58,6 +59,7 @@ export class VehicleAssignmentService {
       vehicleAssignment.driver = driver;
 
       vehicleAssignment.is_active = assignmentData.isActive;
+      vehicleAssignment.assignment_date = new Date();
       await queryRunner.manager.save(vehicleAssignment);
 
       vehicle.assigned_driver = assignmentData.driverId;
@@ -78,10 +80,36 @@ export class VehicleAssignmentService {
     }
   }
 
-  async getAllAssignments(): Promise<VehicleAssignment[] | any> {
+  async getAllAssignments(): Promise<VehicleAssignmentResponseDto[]> {
     try {
-      const assignments = await this.vehicleAssignmentRepository.find();
-      return assignments;
+      const assignments = await this.vehicleAssignmentRepository.find({
+        relations: ['vehicle', 'driver'],
+        select: [
+          'id',
+          'is_active',
+          'vehicle',
+          'driver',
+          'created_at',
+          'updated_at',
+          'assignment_date',
+        ],
+      });
+
+      return assignments.map((assignment) => ({
+        id: assignment.id,
+        isActive: assignment.is_active,
+        assignmentDate: assignment.assignment_date,
+        vehicle: {
+          id: assignment.vehicle.id,
+          number: assignment.vehicle.vehicle_number,
+        },
+        driver: {
+          id: assignment.driver.id,
+          name: assignment.driver.first_name + assignment.driver.last_name,
+        },
+        createdAt: assignment.created_at,
+        updatedAt: assignment.updated_at,
+      }));
     } catch (err) {
       console.log('Error occured while fetching all assignments', err);
       throw new InternalServerErrorException(
@@ -96,6 +124,7 @@ export class VehicleAssignmentService {
       await queryRunner.startTransaction();
       const assignment = await this.vehicleAssignmentRepository.findOne({
         where: { id: assignmentId },
+        relations: ['vehicle', 'driver'],
       });
       if (!assignment) {
         throw new NotFoundException(`Assignment not found!`);
