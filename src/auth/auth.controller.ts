@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   LoginDto,
@@ -6,7 +6,6 @@ import {
   RegisterDto,
   RegsiterResponseDto,
 } from './auth.dto';
-import { AdminAuthMiddleware } from '../middlewares/admin-auth.middleware';
 import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('/auth')
@@ -22,7 +21,6 @@ export class AuthController {
     status: 201,
     description: 'User registered successfully',
   })
-  @UseGuards(AdminAuthMiddleware)
   async registerUser(
     @Body() userData: RegisterDto,
   ): Promise<RegsiterResponseDto> {

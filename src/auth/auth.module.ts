@@ -19,6 +19,6 @@ import { AdminAuthMiddleware } from 'src/middlewares/admin-auth.middleware';
 })
 export class AuthModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AdminAuthMiddleware).forRoutes('auth/register');
+    consumer.apply(AdminAuthMiddleware).forRoutes('/auth/register');
   }
 }
