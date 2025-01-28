@@ -12,6 +12,13 @@ export class DriverSeedService {
   ) {}
 
   async insertDrivers() {
+    console.log('check if data already exist');
+    const driverItem = this.driverRepository.findOne({
+      where: { service_number: '12121' },
+    });
+    if (driverItem) {
+      throw new Error('Seeding is already done');
+    }
     console.log('Seeding Drivers Tables...');
     const drivers: DriversRequestDto[] = [
       {

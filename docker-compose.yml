@@ -2,15 +2,11 @@ services:
   api:
     depends_on:
       - postgres
-    build:
-      dockerfile: Dockerfile
-      context: .
+    image: flanker1916/vehicles-management:latest
     volumes:
       - .:/usr/src/app
     env_file:
       - .env
-    # Run a command against the development stage of the image
-    command: sh -c "npm run start:dev"
     ports:
       - "5000:5000"
 

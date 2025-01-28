@@ -12,6 +12,13 @@ export class VehicleSeedService {
   ) {}
 
   async insertVehicles() {
+    console.log('check if data already exist');
+    const vehicleItem = this.vehicleRepository.findOne({
+      where: { vehicle_number: 'SX-123' },
+    });
+    if (vehicleItem) {
+      throw new Error('Seeding is already done');
+    }
     console.log('Seeding Vehicles Tables...');
     const vehicles: AddVehicleRequestDto[] = [
       {

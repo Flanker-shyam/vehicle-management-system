@@ -114,3 +114,8 @@ This will pull redis and postgres images and containarize the whole application 
 Setup done!!!!
 </ol>
 </div>
+
+
+    build:
+      dockerfile: Dockerfile
+      context: .
