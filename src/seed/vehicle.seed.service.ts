@@ -13,7 +13,7 @@ export class VehicleSeedService {
 
   async insertVehicles() {
     console.log('check if data already exist');
-    const vehicleItem = this.vehicleRepository.findOne({
+    const vehicleItem = await this.vehicleRepository.findOne({
       where: { vehicle_number: 'SX-123' },
     });
     if (vehicleItem) {

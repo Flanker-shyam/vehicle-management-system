@@ -11,16 +11,16 @@ async function bootstrap() {
   const assignmentSeederService = app.get(AssignmentSeedService);
 
   console.log('Running seedings...');
-  await Promise.all([
-    vehicleSeederService.insertVehicles(),
-    driverSeederService.insertDrivers(),
-  ])
-    .then(async () => {
-      await assignmentSeederService.insertvehicleAssignments();
-    })
-    .catch((err) => {
-      console.log(`Error Occured: ${err.message}`);
-    });
+  try {
+    await Promise.all([
+      vehicleSeederService.insertVehicles(),
+      driverSeederService.insertDrivers(),
+    ]);
+    await assignmentSeederService.insertvehicleAssignments();
+  } catch (err) {
+    console.log(`Error Occured: ${err.message}`);
+    throw err;
+  }
   await app.close();
 }
 

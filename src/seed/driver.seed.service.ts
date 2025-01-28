@@ -13,7 +13,7 @@ export class DriverSeedService {
 
   async insertDrivers() {
     console.log('check if data already exist');
-    const driverItem = this.driverRepository.findOne({
+    const driverItem = await this.driverRepository.findOne({
       where: { service_number: '12121' },
     });
     if (driverItem) {

@@ -5,7 +5,9 @@ import { VehicleController } from './vehicle.controller';
 import { VehicleService } from './vehicle.service';
 import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
 import { JwtService } from '@nestjs/jwt';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { AdminAuthMiddleware } from '../middlewares/admin-auth.middleware';
+import { UserAuthMiddleware } from 'src/middlewares/user-auth.middleware';
 
 @Module({
   imports: [
@@ -15,4 +17,14 @@ import { Module } from '@nestjs/common';
   controllers: [VehicleController],
   providers: [VehicleService, JwtService], // Remove AuthEntity from providers
 })
-export class VehicleModule {}
+export class VehicleModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AdminAuthMiddleware).forRoutes(
+      { path: '/vehicle', method: RequestMethod.ALL }, // Apply to all routes under /vehicle
+      { path: '/vehicle/add', method: RequestMethod.ALL }, // Apply to all routes under /vehicle/:id
+    );
+    consumer
+      .apply(UserAuthMiddleware)
+      .forRoutes({ path: '/vehicle/update/:id', method: RequestMethod.PATCH });
+  }
+}
