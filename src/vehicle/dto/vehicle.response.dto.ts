@@ -26,11 +26,11 @@ export class getVehicleResponseDto {
   })
   ododmeter_reading: number;
   @ApiProperty({
-    description: 'Id of Driver assigned (if any)',
+    description: 'Service Number of Driver assigned (if any)',
     type: String,
-    example: '2',
+    example: 'UG5151',
   })
-  assigned_driver: number | null;
+  assigned_driver: string | null;
   @ApiProperty({
     description: 'class of vehicle',
     type: Number,

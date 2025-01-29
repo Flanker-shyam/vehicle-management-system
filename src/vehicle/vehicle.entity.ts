@@ -23,8 +23,8 @@ export class Vehicles {
   @Column({ type: 'float' })
   ododmeter_reading: number;
 
-  @Column({ type: 'integer', nullable: true })
-  assigned_driver: number | null;
+  @Column({ type: 'text', nullable: true })
+  assigned_driver: string | null;
 
   @Column({ type: 'text' })
   current_class: number;

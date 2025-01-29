@@ -22,6 +22,12 @@ class Driver {
     type: String,
   })
   name: string;
+  @ApiProperty({
+    description: 'Service Number',
+    example: 'HF7668',
+    type: String,
+  })
+  serviceNumber: string;
 }
 
 export class VehicleAssignmentResponseDto {
@@ -41,7 +47,7 @@ export class VehicleAssignmentResponseDto {
 
   @ApiProperty({
     description: 'driver',
-    example: { id: 1, name: 'John Doe' },
+    example: { id: 1, name: 'John Doe', serviceNumber: 'GF6578' },
     type: Driver,
   })
   driver: Driver;

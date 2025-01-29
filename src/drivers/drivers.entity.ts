@@ -35,8 +35,8 @@ export class Drivers {
   @Column({ type: 'text' })
   unit: string;
 
-  @Column({ type: 'integer', nullable: true })
-  assigned_vehicle: number | null;
+  @Column({ type: 'text', nullable: true })
+  assigned_vehicle: string | null;
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date;

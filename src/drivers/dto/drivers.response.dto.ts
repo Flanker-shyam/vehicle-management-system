@@ -65,11 +65,11 @@ export class DriversResponseDto {
   created_at: Date;
 
   @ApiProperty({
-    description: 'Assigned vehicle (if any)',
-    type: Number,
-    example: 1,
+    description: 'Assigned vehicle Number(if any)',
+    type: String,
+    example: 'HX-123',
   })
-  assigned_vehicle: number;
+  assigned_vehicle: string;
 
   @ApiProperty({
     description: 'The date when the driver was last updated',

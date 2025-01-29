@@ -1,16 +1,24 @@
-import { IsBoolean, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class VehicleAssignmentRequestDto {
-  @ApiProperty({ description: 'ID of the vehicle', example: 1, type: Number })
-  @IsNumber()
+  @ApiProperty({
+    description: 'vehicle number',
+    example: 'HW-123',
+    type: String,
+  })
+  @IsString()
   @IsNotEmpty()
-  vehicleId: number;
+  vehicleNumber: string;
 
-  @ApiProperty({ description: 'ID of the driver', example: 1, type: Number })
-  @IsNumber()
+  @ApiProperty({
+    description: 'service number of driver',
+    example: 1,
+    type: String,
+  })
+  @IsString()
   @IsNotEmpty()
-  driverId: number;
+  driverServiceNumber: string;
 
   @ApiProperty({
     description: 'Status of the assignment',

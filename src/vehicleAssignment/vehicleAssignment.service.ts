@@ -33,7 +33,7 @@ export class VehicleAssignmentService {
       const vehicleAssignment = new VehicleAssignment();
 
       const vehicle = await queryRunner.manager.findOne(Vehicles, {
-        where: { id: Number(assignmentData.vehicleId) },
+        where: { vehicle_number: assignmentData.vehicleNumber },
       });
       if (!vehicle) {
         throw new NotFoundException('Vehicle not found');
@@ -41,7 +41,7 @@ export class VehicleAssignmentService {
       vehicleAssignment.vehicle = vehicle;
 
       const driver = await queryRunner.manager.findOne(Drivers, {
-        where: { id: Number(assignmentData.driverId) },
+        where: { service_number: assignmentData.driverServiceNumber },
       });
       if (!driver) {
         throw new NotFoundException('Driver not found');
@@ -62,8 +62,8 @@ export class VehicleAssignmentService {
       vehicleAssignment.assignment_date = new Date();
       await queryRunner.manager.save(vehicleAssignment);
 
-      vehicle.assigned_driver = assignmentData.driverId;
-      driver.assigned_vehicle = assignmentData.vehicleId;
+      vehicle.assigned_driver = assignmentData.driverServiceNumber;
+      driver.assigned_vehicle = assignmentData.vehicleNumber;
 
       await Promise.all([
         queryRunner.manager.save(vehicle),
@@ -106,6 +106,7 @@ export class VehicleAssignmentService {
         driver: {
           id: assignment.driver.id,
           name: assignment.driver.first_name + assignment.driver.last_name,
+          serviceNumber: assignment.driver.service_number,
         },
         createdAt: assignment.created_at,
         updatedAt: assignment.updated_at,
