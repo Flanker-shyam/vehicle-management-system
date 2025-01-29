@@ -21,7 +21,8 @@ export class VehicleModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(AdminAuthMiddleware).forRoutes(
       { path: '/vehicle', method: RequestMethod.ALL }, // Apply to all routes under /vehicle
-      { path: '/vehicle/add', method: RequestMethod.ALL }, // Apply to all routes under /vehicle/:id
+      { path: '/vehicle/add', method: RequestMethod.ALL },
+      { path: '/vehicle/:id', method: RequestMethod.ALL }, // Apply to all routes under /vehicle/:id
     );
     consumer
       .apply(UserAuthMiddleware)

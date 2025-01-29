@@ -81,4 +81,20 @@ export class VehicleController {
       throw err;
     }
   }
+
+  @Get(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'a vehicles',
+    type: getVehicleResponseDto,
+  })
+  async getVehicleById(
+    @Param('id') id: string,
+  ): Promise<getVehicleResponseDto> {
+    try {
+      return await this.vehicleService.getVehicleById(Number(id));
+    } catch (err) {
+      throw err;
+    }
+  }
 }

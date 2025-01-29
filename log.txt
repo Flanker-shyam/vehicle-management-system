@@ -14,7 +14,11 @@ api-1       |
 api-1       | > vehicle-system@0.0.1 typeorm
 api-1       | > ts-node ./node_modules/typeorm/cli -d ./src/config/typeorm.ts migration:generate ./src/migrations/vehicleMigrations
 api-1       | 
-api-1       | No changes in database schema were found - cannot generate a migration. To create a new empty migration use "typeorm migration:create" command
+api-1       | Migration /app/src/migrations/1738156919422-vehicleMigrations.ts has been generated successfully.
+api-1       | total 12
+api-1       | drwxr-xr-x    2 root     root          4096 Jan 29 13:22 .
+api-1       | drwxr-xr-x    1 root     root          4096 Jan 29 13:22 ..
+api-1       | -rw-r--r--    1 root     root          3089 Jan 29 13:22 1738156919422-vehicleMigrations.ts
 api-1       | 
 api-1       | > vehicle-system@0.0.1 build
 api-1       | > nest build
@@ -31,65 +35,375 @@ api-1       |
 api-1       | query: SELECT * FROM current_schema()
 api-1       | query: SELECT version();
 api-1       | query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'migrations'
+api-1       | query: CREATE TABLE "migrations" ("id" SERIAL NOT NULL, "timestamp" bigint NOT NULL, "name" character varying NOT NULL, CONSTRAINT "PK_8c82d7f526340ab734260ea46be" PRIMARY KEY ("id"))
 api-1       | query: SELECT * FROM "migrations" "migrations" ORDER BY "id" DESC
-api-1       | No migrations are pending
+api-1       | 0 migrations are already loaded in the database.
+api-1       | 1 migrations were found in the source code.
+api-1       | 1 migrations are new migrations must be executed.
+api-1       | query: START TRANSACTION
+api-1       | query: CREATE TABLE "vehicles" ("id" SERIAL NOT NULL, "vehicle_number" text NOT NULL, "category" text NOT NULL, "ododmeter_reading" double precision NOT NULL, "assigned_driver" integer, "current_class" text NOT NULL, "class_due_date" TIMESTAMP NOT NULL, "pending_maintainence" boolean NOT NULL, "spare_part_requested" text array NOT NULL, "comments" text NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_18d8646b59304dce4af3a9e35b6" PRIMARY KEY ("id"))
+api-1       | query: CREATE TABLE "vehicle_assignment" ("id" SERIAL NOT NULL, "assignment_date" TIMESTAMP NOT NULL DEFAULT now(), "is_active" boolean NOT NULL DEFAULT false, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "driver_id" integer, "vehicle_id" integer, CONSTRAINT "PK_67e752beaab2a3b5a0af8d482bb" PRIMARY KEY ("id"))
+api-1       | query: CREATE TABLE "drivers" ("id" SERIAL NOT NULL, "service_number" text NOT NULL, "rank" text NOT NULL, "first_name" text NOT NULL, "last_name" text NOT NULL, "email" text NOT NULL, "phone_number" character varying(10) NOT NULL, "unit" text NOT NULL, "assigned_vehicle" integer, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_92ab3fb69e566d3eb0cae896047" PRIMARY KEY ("id"))
+api-1       | query: CREATE TABLE "auth" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "username" character varying NOT NULL, "password" character varying NOT NULL, "is_admin" boolean NOT NULL DEFAULT false, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "UQ_366ebf23d8f3781bb7bb37abbd1" UNIQUE ("username"), CONSTRAINT "PK_7e416cf6172bc5aec04244f6459" PRIMARY KEY ("id"))
+api-1       | query: ALTER TABLE "vehicle_assignment" ADD CONSTRAINT "FK_8ab1c47ff733d5545fe855992b1" FOREIGN KEY ("driver_id") REFERENCES "drivers"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+api-1       | query: ALTER TABLE "vehicle_assignment" ADD CONSTRAINT "FK_218c66217fa7023f17a6d2b2925" FOREIGN KEY ("vehicle_id") REFERENCES "vehicles"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+api-1       | query: INSERT INTO "migrations"("timestamp", "name") VALUES ($1, $2) -- PARAMETERS: [1738156919422,"VehicleMigrations1738156919422"]
+api-1       | Migration VehicleMigrations1738156919422 has been  executed successfully.
+api-1       | query: COMMIT
 api-1       | Seeding data...
-api-1       | [32m[Nest] 100  - [39m01/28/2025, 3:13:53 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
-api-1       | [32m[Nest] 100  - [39m01/28/2025, 3:13:53 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +14ms[39m
-api-1       | [32m[Nest] 100  - [39m01/28/2025, 3:13:53 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 100  - [39m01/28/2025, 3:13:53 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 100  - [39m01/28/2025, 3:13:53 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +45ms[39m
-api-1       | [32m[Nest] 100  - [39m01/28/2025, 3:13:53 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 100  - [39m01/28/2025, 3:13:53 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSeedModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 100  - [39m01/29/2025, 1:22:16 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+api-1       | [32m[Nest] 100  - [39m01/29/2025, 1:22:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +15ms[39m
+api-1       | [32m[Nest] 100  - [39m01/29/2025, 1:22:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 100  - [39m01/29/2025, 1:22:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 100  - [39m01/29/2025, 1:22:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +49ms[39m
+api-1       | [32m[Nest] 100  - [39m01/29/2025, 1:22:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 100  - [39m01/29/2025, 1:22:16 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSeedModule dependencies initialized[39m[38;5;3m +1ms[39m
 api-1       | Running seedings...
 api-1       | Seeding Vehicles Tables...
 api-1       | Seeding Drivers Tables...
 api-1       | Seeding Vehicle Assignments Tables...
 api-1       | Creating admin user...
+api-1       | INSERT 0 1
 api-1       | Starting the server...
 api-1       | 
 api-1       | > vehicle-system@0.0.1 start:dev
 api-1       | > nest start --watch
 api-1       | 
-api-1       | [2J[3J[H[[90m3:13:54 PM[0m] Starting compilation in watch mode...
+api-1       | [2J[3J[H[[90m1:22:17 PM[0m] Starting compilation in watch mode...
 api-1       | 
-api-1       | [[90m3:13:58 PM[0m] Found 0 errors. Watching for file changes.
+api-1       | [[90m1:22:21 PM[0m] Found 0 errors. Watching for file changes.
 api-1       | 
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +26ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDiscoveryModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mScheduleModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mScheduleModule dependencies initialized[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +73ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTasksModule dependencies initialized[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDriversModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVehicleAssignmentModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVehicleModule dependencies initialized[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/vehicles-api}:[39m[38;5;3m +36ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api, GET} route[39m[38;5;3m +3ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/vehicles-api/auth}:[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/auth/register, POST} route[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/auth/login, POST} route[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVehicleController {/vehicles-api/vehicle}:[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicle, GET} route[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicle/add, POST} route[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicle/update/:id, PATCH} route[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDriversController {/vehicles-api/driver}:[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver, GET} route[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver/add, POST} route[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver/:id, GET} route[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVehicleAssignmentController {/vehicles-api/vehicleAssignment}:[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment, GET} route[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment/assign, POST} route[39m[38;5;3m +1ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment/unassign/:id, PATCH} route[39m[38;5;3m +0ms[39m
-api-1       | [32m[Nest] 135  - [39m01/28/2025, 3:14:00 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +16ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +23ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDiscoveryModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mScheduleModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mScheduleModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +81ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTasksModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDriversModule dependencies initialized[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVehicleAssignmentModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVehicleModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/vehicles-api}:[39m[38;5;3m +47ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api, GET} route[39m[38;5;3m +4ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/vehicles-api/auth}:[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:22 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/auth/register, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/auth/login, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVehicleController {/vehicles-api/vehicle}:[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicle, GET} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicle/add, POST} route[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicle/update/:id, PATCH} route[39m[38;5;3m +2ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDriversController {/vehicles-api/driver}:[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver, GET} route[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver/add, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/driver/:id, GET} route[39m[38;5;3m +0ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVehicleAssignmentController {/vehicles-api/vehicleAssignment}:[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment, GET} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment/assign, POST} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/vehicles-api/vehicleAssignment/unassign/:id, PATCH} route[39m[38;5;3m +1ms[39m
+api-1       | [32m[Nest] 136  - [39m01/29/2025, 1:22:23 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +16ms[39m
+api-1       | Request path: /vehicles-api/auth/login, and method: POST
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?currentClass=1, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?currentClass=3, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?currentClass=4, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?currentClass=1, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?sparePartRequested=oil, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?sparePartRequested=oil, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?currentClass=1, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?currentClass=3, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle/add, and method: POST
+api-1       | Error occured while adding vehicle QueryFailedError: null value in column "pending_maintainence" of relation "vehicles" violates not-null constraint
+api-1       |     at PostgresQueryRunner.query (/app/node_modules/typeorm/driver/src/driver/postgres/PostgresQueryRunner.ts:331:19)
+api-1       |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+api-1       |     at async InsertQueryBuilder.execute (/app/node_modules/typeorm/query-builder/src/query-builder/InsertQueryBuilder.ts:163:33)
+api-1       |     at async SubjectExecutor.executeInsertOperations (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:435:42)
+api-1       |     at async SubjectExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:137:9)
+api-1       |     at async EntityPersistExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/EntityPersistExecutor.ts:182:21)
+api-1       |     at async VehicleService.addVehicle (/app/src/vehicle/vehicle.service.ts:76:7)
+api-1       |     at async VehicleController.addVehicle (/app/src/vehicle/vehicle.controller.ts:66:12)
+api-1       |     at async /app/node_modules/@nestjs/core/router/router-execution-context.js:46:28
+api-1       |     at async /app/node_modules/@nestjs/core/router/router-proxy.js:9:17 {
+api-1       |   query: 'INSERT INTO "vehicles"("vehicle_number", "category", "ododmeter_reading", "assigned_driver", "current_class", "class_due_date", "pending_maintainence", "spare_part_requested", "comments", "created_at", "updated_at") VALUES ($1, $2, $3, DEFAULT, $4, $5, DEFAULT, DEFAULT, $6, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"',
+api-1       |   parameters: [
+api-1       |     'FG-123',
+api-1       |     'als',
+api-1       |     '1221',
+api-1       |     '2',
+api-1       |     2025-01-31T00:00:00.000Z,
+api-1       |     'idk testing UI'
+api-1       |   ],
+api-1       |   driverError: error: null value in column "pending_maintainence" of relation "vehicles" violates not-null constraint
+api-1       |       at /app/node_modules/pg/lib/client.js:535:17
+api-1       |       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+api-1       |       at async PostgresQueryRunner.query (/app/node_modules/typeorm/driver/src/driver/postgres/PostgresQueryRunner.ts:260:25)
+api-1       |       at async InsertQueryBuilder.execute (/app/node_modules/typeorm/query-builder/src/query-builder/InsertQueryBuilder.ts:163:33)
+api-1       |       at async SubjectExecutor.executeInsertOperations (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:435:42)
+api-1       |       at async SubjectExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:137:9)
+api-1       |       at async EntityPersistExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/EntityPersistExecutor.ts:182:21)
+api-1       |       at async VehicleService.addVehicle (/app/src/vehicle/vehicle.service.ts:76:7)
+api-1       |       at async VehicleController.addVehicle (/app/src/vehicle/vehicle.controller.ts:66:12)
+api-1       |       at async /app/node_modules/@nestjs/core/router/router-execution-context.js:46:28 {
+api-1       |     length: 356,
+api-1       |     severity: 'ERROR',
+api-1       |     code: '23502',
+api-1       |     detail: 'Failing row contains (5, FG-123, als, 1221, null, 2, 2025-01-31 00:00:00, null, null, idk testing UI, 2025-01-29 14:24:05.08534, 2025-01-29 14:24:05.08534).',
+api-1       |     hint: undefined,
+api-1       |     position: undefined,
+api-1       |     internalPosition: undefined,
+api-1       |     internalQuery: undefined,
+api-1       |     where: undefined,
+api-1       |     schema: 'public',
+api-1       |     table: 'vehicles',
+api-1       |     column: 'pending_maintainence',
+api-1       |     dataType: undefined,
+api-1       |     constraint: undefined,
+api-1       |     file: 'execMain.c',
+api-1       |     line: '1987',
+api-1       |     routine: 'ExecConstraints'
+api-1       |   },
+api-1       |   length: 356,
+api-1       |   severity: 'ERROR',
+api-1       |   code: '23502',
+api-1       |   detail: 'Failing row contains (5, FG-123, als, 1221, null, 2, 2025-01-31 00:00:00, null, null, idk testing UI, 2025-01-29 14:24:05.08534, 2025-01-29 14:24:05.08534).',
+api-1       |   hint: undefined,
+api-1       |   position: undefined,
+api-1       |   internalPosition: undefined,
+api-1       |   internalQuery: undefined,
+api-1       |   where: undefined,
+api-1       |   schema: 'public',
+api-1       |   table: 'vehicles',
+api-1       |   column: 'pending_maintainence',
+api-1       |   dataType: undefined,
+api-1       |   constraint: undefined,
+api-1       |   file: 'execMain.c',
+api-1       |   line: '1987',
+api-1       |   routine: 'ExecConstraints'
+api-1       | }
+api-1       | Request path: /vehicles-api/vehicle/add, and method: POST
+api-1       | Error occured while adding vehicle QueryFailedError: null value in column "spare_part_requested" of relation "vehicles" violates not-null constraint
+api-1       |     at PostgresQueryRunner.query (/app/node_modules/typeorm/driver/src/driver/postgres/PostgresQueryRunner.ts:331:19)
+api-1       |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+api-1       |     at async InsertQueryBuilder.execute (/app/node_modules/typeorm/query-builder/src/query-builder/InsertQueryBuilder.ts:163:33)
+api-1       |     at async SubjectExecutor.executeInsertOperations (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:435:42)
+api-1       |     at async SubjectExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:137:9)
+api-1       |     at async EntityPersistExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/EntityPersistExecutor.ts:182:21)
+api-1       |     at async VehicleService.addVehicle (/app/src/vehicle/vehicle.service.ts:76:7)
+api-1       |     at async VehicleController.addVehicle (/app/src/vehicle/vehicle.controller.ts:66:12)
+api-1       |     at async /app/node_modules/@nestjs/core/router/router-execution-context.js:46:28
+api-1       |     at async /app/node_modules/@nestjs/core/router/router-proxy.js:9:17 {
+api-1       |   query: 'INSERT INTO "vehicles"("vehicle_number", "category", "ododmeter_reading", "assigned_driver", "current_class", "class_due_date", "pending_maintainence", "spare_part_requested", "comments", "created_at", "updated_at") VALUES ($1, $2, $3, DEFAULT, $4, $5, $6, DEFAULT, $7, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"',
+api-1       |   parameters: [
+api-1       |     'FG-123',
+api-1       |     'als',
+api-1       |     '1221',
+api-1       |     '2',
+api-1       |     2025-01-31T00:00:00.000Z,
+api-1       |     false,
+api-1       |     'idk testing UI'
+api-1       |   ],
+api-1       |   driverError: error: null value in column "spare_part_requested" of relation "vehicles" violates not-null constraint
+api-1       |       at /app/node_modules/pg/lib/client.js:535:17
+api-1       |       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+api-1       |       at async PostgresQueryRunner.query (/app/node_modules/typeorm/driver/src/driver/postgres/PostgresQueryRunner.ts:260:25)
+api-1       |       at async InsertQueryBuilder.execute (/app/node_modules/typeorm/query-builder/src/query-builder/InsertQueryBuilder.ts:163:33)
+api-1       |       at async SubjectExecutor.executeInsertOperations (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:435:42)
+api-1       |       at async SubjectExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:137:9)
+api-1       |       at async EntityPersistExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/EntityPersistExecutor.ts:182:21)
+api-1       |       at async VehicleService.addVehicle (/app/src/vehicle/vehicle.service.ts:76:7)
+api-1       |       at async VehicleController.addVehicle (/app/src/vehicle/vehicle.controller.ts:66:12)
+api-1       |       at async /app/node_modules/@nestjs/core/router/router-execution-context.js:46:28 {
+api-1       |     length: 355,
+api-1       |     severity: 'ERROR',
+api-1       |     code: '23502',
+api-1       |     detail: 'Failing row contains (6, FG-123, als, 1221, null, 2, 2025-01-31 00:00:00, f, null, idk testing UI, 2025-01-29 14:25:46.253796, 2025-01-29 14:25:46.253796).',
+api-1       |     hint: undefined,
+api-1       |     position: undefined,
+api-1       |     internalPosition: undefined,
+api-1       |     internalQuery: undefined,
+api-1       |     where: undefined,
+api-1       |     schema: 'public',
+api-1       |     table: 'vehicles',
+api-1       |     column: 'spare_part_requested',
+api-1       |     dataType: undefined,
+api-1       |     constraint: undefined,
+api-1       |     file: 'execMain.c',
+api-1       |     line: '1987',
+api-1       |     routine: 'ExecConstraints'
+api-1       |   },
+api-1       |   length: 355,
+api-1       |   severity: 'ERROR',
+api-1       |   code: '23502',
+api-1       |   detail: 'Failing row contains (6, FG-123, als, 1221, null, 2, 2025-01-31 00:00:00, f, null, idk testing UI, 2025-01-29 14:25:46.253796, 2025-01-29 14:25:46.253796).',
+api-1       |   hint: undefined,
+api-1       |   position: undefined,
+api-1       |   internalPosition: undefined,
+api-1       |   internalQuery: undefined,
+api-1       |   where: undefined,
+api-1       |   schema: 'public',
+api-1       |   table: 'vehicles',
+api-1       |   column: 'spare_part_requested',
+api-1       |   dataType: undefined,
+api-1       |   constraint: undefined,
+api-1       |   file: 'execMain.c',
+api-1       |   line: '1987',
+api-1       |   routine: 'ExecConstraints'
+api-1       | }
+api-1       | Request path: /vehicles-api/vehicle/add, and method: POST
+api-1       | Error occured while adding vehicle QueryFailedError: null value in column "spare_part_requested" of relation "vehicles" violates not-null constraint
+api-1       |     at PostgresQueryRunner.query (/app/node_modules/typeorm/driver/src/driver/postgres/PostgresQueryRunner.ts:331:19)
+api-1       |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+api-1       |     at async InsertQueryBuilder.execute (/app/node_modules/typeorm/query-builder/src/query-builder/InsertQueryBuilder.ts:163:33)
+api-1       |     at async SubjectExecutor.executeInsertOperations (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:435:42)
+api-1       |     at async SubjectExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:137:9)
+api-1       |     at async EntityPersistExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/EntityPersistExecutor.ts:182:21)
+api-1       |     at async VehicleService.addVehicle (/app/src/vehicle/vehicle.service.ts:76:7)
+api-1       |     at async VehicleController.addVehicle (/app/src/vehicle/vehicle.controller.ts:66:12)
+api-1       |     at async /app/node_modules/@nestjs/core/router/router-execution-context.js:46:28
+api-1       |     at async /app/node_modules/@nestjs/core/router/router-proxy.js:9:17 {
+api-1       |   query: 'INSERT INTO "vehicles"("vehicle_number", "category", "ododmeter_reading", "assigned_driver", "current_class", "class_due_date", "pending_maintainence", "spare_part_requested", "comments", "created_at", "updated_at") VALUES ($1, $2, $3, DEFAULT, $4, $5, $6, DEFAULT, $7, DEFAULT, DEFAULT) RETURNING "id", "created_at", "updated_at"',
+api-1       |   parameters: [
+api-1       |     'FG-123',
+api-1       |     'als',
+api-1       |     '1221',
+api-1       |     '2',
+api-1       |     2025-02-08T00:00:00.000Z,
+api-1       |     false,
+api-1       |     'idk test UI'
+api-1       |   ],
+api-1       |   driverError: error: null value in column "spare_part_requested" of relation "vehicles" violates not-null constraint
+api-1       |       at /app/node_modules/pg/lib/client.js:535:17
+api-1       |       at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+api-1       |       at async PostgresQueryRunner.query (/app/node_modules/typeorm/driver/src/driver/postgres/PostgresQueryRunner.ts:260:25)
+api-1       |       at async InsertQueryBuilder.execute (/app/node_modules/typeorm/query-builder/src/query-builder/InsertQueryBuilder.ts:163:33)
+api-1       |       at async SubjectExecutor.executeInsertOperations (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:435:42)
+api-1       |       at async SubjectExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/SubjectExecutor.ts:137:9)
+api-1       |       at async EntityPersistExecutor.execute (/app/node_modules/typeorm/persistence/src/persistence/EntityPersistExecutor.ts:182:21)
+api-1       |       at async VehicleService.addVehicle (/app/src/vehicle/vehicle.service.ts:76:7)
+api-1       |       at async VehicleController.addVehicle (/app/src/vehicle/vehicle.controller.ts:66:12)
+api-1       |       at async /app/node_modules/@nestjs/core/router/router-execution-context.js:46:28 {
+api-1       |     length: 352,
+api-1       |     severity: 'ERROR',
+api-1       |     code: '23502',
+api-1       |     detail: 'Failing row contains (7, FG-123, als, 1221, null, 2, 2025-02-08 00:00:00, f, null, idk test UI, 2025-01-29 14:27:01.198209, 2025-01-29 14:27:01.198209).',
+api-1       |     hint: undefined,
+api-1       |     position: undefined,
+api-1       |     internalPosition: undefined,
+api-1       |     internalQuery: undefined,
+api-1       |     where: undefined,
+api-1       |     schema: 'public',
+api-1       |     table: 'vehicles',
+api-1       |     column: 'spare_part_requested',
+api-1       |     dataType: undefined,
+api-1       |     constraint: undefined,
+api-1       |     file: 'execMain.c',
+api-1       |     line: '1987',
+api-1       |     routine: 'ExecConstraints'
+api-1       |   },
+api-1       |   length: 352,
+api-1       |   severity: 'ERROR',
+api-1       |   code: '23502',
+api-1       |   detail: 'Failing row contains (7, FG-123, als, 1221, null, 2, 2025-02-08 00:00:00, f, null, idk test UI, 2025-01-29 14:27:01.198209, 2025-01-29 14:27:01.198209).',
+api-1       |   hint: undefined,
+api-1       |   position: undefined,
+api-1       |   internalPosition: undefined,
+api-1       |   internalQuery: undefined,
+api-1       |   where: undefined,
+api-1       |   schema: 'public',
+api-1       |   table: 'vehicles',
+api-1       |   column: 'spare_part_requested',
+api-1       |   dataType: undefined,
+api-1       |   constraint: undefined,
+api-1       |   file: 'execMain.c',
+api-1       |   line: '1987',
+api-1       |   routine: 'ExecConstraints'
+api-1       | }
+api-1       | Request path: /vehicles-api/vehicle/add, and method: POST
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?category=als, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?sparePartRequested=mechanical%20parts, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?sparePartRequested=electrical%20parts, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?sparePartRequested=tyre, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?sparePartRequested=tyres, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/auth/login, and method: POST
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/auth/login, and method: POST
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/vehicle?, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET
+api-1       | Request path: /vehicles-api/driver, and method: GET

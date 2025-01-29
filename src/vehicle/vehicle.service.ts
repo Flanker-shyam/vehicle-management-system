@@ -83,6 +83,19 @@ export class VehicleService {
     }
   }
 
+  async getVehicleById(id: number): Promise<getVehicleResponseDto> {
+    try {
+      const vehicle = await this.vehicleRepository.findOne({ where: { id } });
+      if (!vehicle) {
+        throw new NotFoundException('Vehicle not found');
+      }
+      return vehicle;
+    } catch (err) {
+      console.log('Error occurred while fetching vehicle by id', err);
+      throw err;
+    }
+  }
+
   async updateVehicleDetails(
     id: number,
     vehicleData: UpdateVehicleRequestDto,
