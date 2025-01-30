@@ -9,9 +9,9 @@ import { Repository } from 'typeorm';
 import { VehicleAssignment } from './vehicleToDriverAssignment.entitty';
 import { Vehicles } from '../vehicle/vehicle.entity';
 import { Drivers } from '../drivers/drivers.entity';
-import { VehicleAssignmentRequestDto } from './dto/vehicleAssignment.request.dto';
 import { connectionSource } from '../config/typeorm';
 import { VehicleAssignmentResponseDto } from './dto/vehicleAssignment.response.dto';
+import { VehicleAssignmentRequestDto } from './dto/vehicleAssignment.request.dto';
 
 @Injectable()
 export class VehicleAssignmentService {
@@ -116,6 +116,36 @@ export class VehicleAssignmentService {
       throw new InternalServerErrorException(
         `Internal server error: ${err.message}`,
       );
+    }
+  }
+
+  async getAssignmentById(id: number): Promise<VehicleAssignmentResponseDto> {
+    try {
+      const assignment = await this.vehicleAssignmentRepository.findOne({
+        where: { id: id },
+        relations: ['vehicle', 'driver'],
+      });
+      if (!assignment) {
+        throw new NotFoundException('Assignment does not exist');
+      }
+      return {
+        id: assignment.id,
+        isActive: assignment.is_active,
+        assignmentDate: assignment.assignment_date,
+        vehicle: {
+          id: assignment.vehicle.id,
+          number: assignment.vehicle.vehicle_number,
+        },
+        driver: {
+          id: assignment.driver.id,
+          name: assignment.driver.first_name + assignment.driver.last_name,
+          serviceNumber: assignment.driver.service_number,
+        },
+        createdAt: assignment.created_at,
+        updatedAt: assignment.updated_at,
+      };
+    } catch (err) {
+      throw err;
     }
   }
 

@@ -31,6 +31,22 @@ export class VehicleAssignmentController {
     return await this.vehicleAssignmentService.getAllAssignments();
   }
 
+  @Get('/:id')
+  @ApiResponse({
+    status: 200,
+    description: 'success',
+    type: VehicleAssignmentResponseDto,
+  })
+  async getAssignmentById(
+    @Param('id') id: string,
+  ): Promise<VehicleAssignmentResponseDto> {
+    try {
+      return await this.vehicleAssignmentService.getAssignmentById(Number(id));
+    } catch (err) {
+      throw err;
+    }
+  }
+
   @Post('assign')
   @ApiResponse({
     status: 201,
