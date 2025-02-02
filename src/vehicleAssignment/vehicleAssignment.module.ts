@@ -8,6 +8,8 @@ import { Drivers } from '../drivers/drivers.entity';
 import { VehicleAssignmentService } from './vehicleAssignment.service';
 import { AdminAuthMiddleware } from 'src/middlewares/admin-auth.middleware';
 import { JwtService } from '@nestjs/jwt';
+import { VehicleService } from '../vehicle/vehicle.service';
+import { DriversService } from '../drivers/drivers.service';
 
 @Module({
   imports: [
@@ -15,7 +17,12 @@ import { JwtService } from '@nestjs/jwt';
     ScheduleModule,
   ],
   controllers: [VehicleAssignmentController],
-  providers: [VehicleAssignmentService, JwtService],
+  providers: [
+    VehicleAssignmentService,
+    JwtService,
+    VehicleService,
+    DriversService,
+  ],
 })
 export class VehicleAssignmentModule {
   configure(consume: MiddlewareConsumer) {

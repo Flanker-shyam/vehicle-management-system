@@ -11,6 +11,10 @@ import { VehicleAssignmentService } from './vehicleAssignment.service';
 import { VehicleAssignmentRequestDto } from './dto/vehicleAssignment.request.dto';
 import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { VehicleAssignmentResponseDto } from './dto/vehicleAssignment.response.dto';
+import { VehicleService } from '../vehicle/vehicle.service';
+import { DriversService } from '../drivers/drivers.service';
+import { Vehicles } from '../vehicle/vehicle.entity';
+import { Drivers } from '../drivers/drivers.entity';
 
 @Injectable()
 @ApiTags('/vehicleAssignment')
@@ -19,6 +23,8 @@ import { VehicleAssignmentResponseDto } from './dto/vehicleAssignment.response.d
 export class VehicleAssignmentController {
   constructor(
     private readonly vehicleAssignmentService: VehicleAssignmentService,
+    private readonly vehiclesService: VehicleService,
+    private readonly driversService: DriversService,
   ) {}
 
   @Get()
@@ -72,5 +78,36 @@ export class VehicleAssignmentController {
   })
   async unAssignVehicle(@Param('id') id: string): Promise<number> {
     return await this.vehicleAssignmentService.submitVehicle(Number(id));
+  }
+
+  @Get('vehicles-drivers')
+  @ApiResponse({
+    status: 200,
+    description: 'Success',
+  })
+  async getAllVehiclesAndDrivers(): Promise<{
+    drivers: string[];
+    vehicles: string[];
+  }> {
+    try {
+      console.log('heree..in controller');
+      const vehicles = await this.vehiclesService.getAllVehicles();
+      const drivers = await this.driversService.getAllDrivers();
+
+      if (!vehicles || !drivers) {
+        throw new Error('Error fetching Vehicles or drivers');
+      }
+
+      const driversList = drivers.map(
+        (driver: Drivers) => driver.service_number,
+      );
+      const vehicleList = vehicles.map(
+        (vehicle: Vehicles) => vehicle.vehicle_number,
+      );
+
+      return { drivers: driversList, vehicles: vehicleList };
+    } catch (err) {
+      throw err;
+    }
   }
 }
