@@ -31,6 +31,7 @@ async function bootstrap() {
     }),
   );
   await connectionSource.initialize();
+  app.useLogger(console);
   await app.listen(5000);
 }
 bootstrap();

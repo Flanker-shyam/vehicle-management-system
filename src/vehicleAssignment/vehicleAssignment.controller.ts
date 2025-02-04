@@ -27,7 +27,7 @@ export class VehicleAssignmentController {
     private readonly driversService: DriversService,
   ) {}
 
-  @Get()
+  @Get('/')
   @ApiResponse({
     status: 200,
     description: 'success',
@@ -35,6 +35,37 @@ export class VehicleAssignmentController {
   })
   async getAllAssignments(): Promise<VehicleAssignmentResponseDto[]> {
     return await this.vehicleAssignmentService.getAllAssignments();
+  }
+
+  @Get('/get-vehicles-drivers')
+  @ApiResponse({
+    status: 200,
+    description: 'Success',
+  })
+  async getAllVehiclesAndDrivers(): Promise<{
+    drivers: string[];
+    vehicles: string[];
+  }> {
+    try {
+      const vehicles = await this.vehiclesService.getAllVehicles();
+      const drivers = await this.driversService.getAllDrivers();
+
+      if (!vehicles || !drivers) {
+        throw new Error('Error fetching Vehicles or drivers');
+      }
+
+      const driversList = drivers
+        .filter((driver: Drivers) => driver.assigned_vehicle === null)
+        .map((driver: Drivers) => driver.service_number);
+
+      const vehicleList = vehicles
+        .filter((vehicle: Vehicles) => vehicle.assigned_driver === null)
+        .map((vehicle: Vehicles) => vehicle.vehicle_number);
+
+      return { drivers: driversList, vehicles: vehicleList };
+    } catch (err) {
+      throw err;
+    }
   }
 
   @Get('/:id')
@@ -78,36 +109,5 @@ export class VehicleAssignmentController {
   })
   async unAssignVehicle(@Param('id') id: string): Promise<number> {
     return await this.vehicleAssignmentService.submitVehicle(Number(id));
-  }
-
-  @Get('vehicles-drivers')
-  @ApiResponse({
-    status: 200,
-    description: 'Success',
-  })
-  async getAllVehiclesAndDrivers(): Promise<{
-    drivers: string[];
-    vehicles: string[];
-  }> {
-    try {
-      console.log('heree..in controller');
-      const vehicles = await this.vehiclesService.getAllVehicles();
-      const drivers = await this.driversService.getAllDrivers();
-
-      if (!vehicles || !drivers) {
-        throw new Error('Error fetching Vehicles or drivers');
-      }
-
-      const driversList = drivers.map(
-        (driver: Drivers) => driver.service_number,
-      );
-      const vehicleList = vehicles.map(
-        (vehicle: Vehicles) => vehicle.vehicle_number,
-      );
-
-      return { drivers: driversList, vehicles: vehicleList };
-    } catch (err) {
-      throw err;
-    }
   }
 }
