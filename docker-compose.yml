@@ -9,6 +9,20 @@ services:
       - .env
     ports:
       - "5000:5000"
+    pull_policy: always
+
+  UI:
+    depends_on:
+      - api
+    image: flanker1916/vehicle-management-ui:latest
+    volumes:
+      - .:/usr/src/app
+    environment: 
+      NODE_ENV: 'development' 
+      REACT_APP_DEV_URL: http://localhost:5000/vehicles-api
+    ports:
+      - "3000:3000"
+    pull_policy: always
 
   postgres:
     image: postgres
