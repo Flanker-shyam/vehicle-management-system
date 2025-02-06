@@ -38,7 +38,6 @@ export class VehicleAssignmentService {
       if (!vehicle) {
         throw new NotFoundException('Vehicle not found');
       }
-      vehicleAssignment.vehicle = vehicle;
 
       const driver = await queryRunner.manager.findOne(Drivers, {
         where: { service_number: assignmentData.driverServiceNumber },
@@ -57,18 +56,17 @@ export class VehicleAssignmentService {
         throw new ConflictException('Vehicle is Already assigned and active');
       }
       vehicleAssignment.driver = driver;
+      vehicleAssignment.vehicle = vehicle;
 
       vehicleAssignment.is_active = assignmentData.isActive;
       vehicleAssignment.assignment_date = new Date();
-      await queryRunner.manager.save(vehicleAssignment);
 
       vehicle.assigned_driver = assignmentData.driverServiceNumber;
       driver.assigned_vehicle = assignmentData.vehicleNumber;
 
-      await Promise.all([
-        queryRunner.manager.save(vehicle),
-        queryRunner.manager.save(driver),
-      ]);
+      await queryRunner.manager.save(vehicleAssignment);
+      await queryRunner.manager.save(vehicle);
+      await queryRunner.manager.save(driver);
       await queryRunner.commitTransaction();
       return vehicleAssignment.id;
     } catch (err) {
