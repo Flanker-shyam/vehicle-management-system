@@ -12,10 +12,10 @@ async function bootstrap() {
 
   console.log('Running seedings...');
   try {
-    await Promise.all([
-      vehicleSeederService.insertVehicles(),
-      driverSeederService.insertDrivers(),
-    ]);
+    await vehicleSeederService.insertVehicles();
+    await driverSeederService.insertDrivers();
+    // Adding a wait before assignment seed
+    await new Promise((resolve) => setTimeout(resolve, 10000));
     await assignmentSeederService.insertvehicleAssignments();
   } catch (err) {
     console.log(`Error Occured: ${err.message}`);

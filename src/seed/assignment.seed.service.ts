@@ -35,10 +35,14 @@ export class AssignmentSeedService {
     vehicleAssignment2.vehicle = vehicles[0];
     vehicleAssignment2.assignment_date = new Date('04-02-2024');
     vehicleAssignment2.is_active = true;
+    drivers[0].assigned_vehicle = vehicles[0].vehicle_number;
+    vehicles[0].assigned_driver = drivers[0].service_number;
 
     await Promise.all([
       this.vehicleAssignmentRepository.save(vehicleAssignment1),
       this.vehicleAssignmentRepository.save(vehicleAssignment2),
+      this.vehiclesRepository.save(vehicles[0]),
+      this.driverRepository.save(drivers[0]),
     ]);
   }
 }
