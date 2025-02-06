@@ -15,7 +15,7 @@ async function bootstrap() {
     await vehicleSeederService.insertVehicles();
     await driverSeederService.insertDrivers();
     // Adding a wait before assignment seed
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     await assignmentSeederService.insertvehicleAssignments();
   } catch (err) {
     console.log(`Error Occured: ${err.message}`);

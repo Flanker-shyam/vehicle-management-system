@@ -10,9 +10,9 @@ export class AssignmentSeedService {
   constructor(
     @InjectRepository(VehicleAssignment)
     private readonly vehicleAssignmentRepository: Repository<VehicleAssignment>,
-    @InjectRepository(VehicleAssignment)
+    @InjectRepository(Vehicles)
     private readonly vehiclesRepository: Repository<Vehicles>,
-    @InjectRepository(VehicleAssignment)
+    @InjectRepository(Drivers)
     private readonly driverRepository: Repository<Drivers>,
   ) {}
 
