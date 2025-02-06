@@ -7,7 +7,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Drivers } from './drivers.entity';
 import { DriversResponseDto } from './dto/drivers.response.dto';
-import { DriversRequestDto } from './dto/drivers.request.dto';
+import {
+  DriversRequestDto,
+  UpdateDriversRequestDto,
+} from './dto/drivers.request.dto';
 
 @Injectable()
 export class DriversService {
@@ -57,6 +60,31 @@ export class DriversService {
       return driver;
     } catch (err) {
       console.log('Error occured while fetching driver by id', err);
+      throw err;
+    }
+  }
+
+  async updateDriver(
+    id: number,
+    updateBody: UpdateDriversRequestDto,
+  ): Promise<DriversResponseDto> {
+    try {
+      const driver = await this.driversRepository.findOne({ where: { id } });
+      if (!driver) {
+        throw new NotFoundException(`Driver not found`);
+      }
+
+      driver.rank = updateBody.rank ?? driver.rank;
+      driver.first_name = updateBody.first_name ?? driver.first_name;
+      driver.last_name = updateBody.last_name ?? driver.last_name;
+      driver.email = updateBody.email ?? driver.email;
+      driver.phone_number = updateBody.phone_number ?? driver.phone_number;
+      driver.unit = updateBody.unit ?? driver.unit;
+
+      await this.driversRepository.save(driver);
+      return driver;
+    } catch (err) {
+      console.log('Error occured while updating driver', err);
       throw err;
     }
   }

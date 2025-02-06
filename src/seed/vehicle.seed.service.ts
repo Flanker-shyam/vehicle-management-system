@@ -23,7 +23,7 @@ export class VehicleSeedService {
     const vehicles: AddVehicleRequestDto[] = [
       {
         vehicleNumber: 'SX-123',
-        category: 'Gypsy',
+        category: 'gypsy',
         ododmeterReading: 1245,
         assignedDriver: '2',
         currentClass: 1,
@@ -34,18 +34,18 @@ export class VehicleSeedService {
       },
       {
         vehicleNumber: 'HX-123',
-        category: 'Dozer',
+        category: 'dozer',
         ododmeterReading: 1245,
         assignedDriver: '2',
         currentClass: 1,
         classDueDate: new Date('2024-02-03'),
         pendingMaintainence: false,
-        sparePartRequested: ['oil', 'tires'],
+        sparePartRequested: ['oil', 'tyres'],
         comments: 'string',
       },
       {
         vehicleNumber: 'GC-123',
-        category: 'Misc',
+        category: 'misc',
         ododmeterReading: 1245,
         assignedDriver: '1',
         currentClass: 1,
@@ -56,7 +56,7 @@ export class VehicleSeedService {
       },
       {
         vehicleNumber: 'IDK-322',
-        category: 'Dozer',
+        category: 'dozer',
         ododmeterReading: 115,
         assignedDriver: null,
         currentClass: 3,
@@ -67,13 +67,13 @@ export class VehicleSeedService {
       },
       {
         vehicleNumber: 'IKH-322',
-        category: 'Dozer',
+        category: 'dozer',
         ododmeterReading: 115,
         assignedDriver: null,
         currentClass: 2,
         classDueDate: new Date('2024-02-03'),
         pendingMaintainence: false,
-        sparePartRequested: ['misc', 'engine'],
+        sparePartRequested: ['misc', 'mechanical parts'],
         comments: 'this is also dummy',
       },
       {
@@ -84,7 +84,7 @@ export class VehicleSeedService {
         currentClass: 4,
         classDueDate: new Date('2024-02-03'),
         pendingMaintainence: false,
-        sparePartRequested: ['misc', 'engine'],
+        sparePartRequested: ['electrical parts', 'engine'],
         comments: 'this is also dummy',
       },
     ];

@@ -1,7 +1,10 @@
-import { Controller, Get, Body, Post, Param } from '@nestjs/common';
+import { Controller, Get, Body, Post, Param, Patch } from '@nestjs/common';
 import { DriversResponseDto } from './dto/drivers.response.dto';
 import { DriversService } from './drivers.service';
-import { DriversRequestDto } from './dto/drivers.request.dto';
+import {
+  DriversRequestDto,
+  UpdateDriversRequestDto,
+} from './dto/drivers.request.dto';
 import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('/driver')
@@ -41,5 +44,23 @@ export class DriversController {
   })
   async getDriverById(@Param('id') id: number): Promise<DriversResponseDto> {
     return await this.driversService.getDriverById(id);
+  }
+
+  @Patch(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'details of a driver',
+    type: DriversResponseDto,
+  })
+  @ApiBody({ type: UpdateDriversRequestDto })
+  async updateDriver(
+    @Param('id') id: number,
+    @Body() updateBody: UpdateDriversRequestDto,
+  ): Promise<DriversResponseDto> {
+    try {
+      return await this.driversService.updateDriver(Number(id), updateBody);
+    } catch (err) {
+      throw err;
+    }
   }
 }

@@ -50,3 +50,47 @@ export class DriversRequestDto {
   })
   unit: string;
 }
+
+export class UpdateDriversRequestDto {
+  @ApiProperty({
+    description: 'Rank of the driver',
+    example: 'Captain',
+    type: String,
+  })
+  rank: string;
+
+  @ApiProperty({
+    description: 'First name of the driver',
+    example: 'John',
+    type: String,
+  })
+  first_name: string;
+
+  @ApiProperty({
+    description: 'Last name of the driver',
+    example: 'Doe',
+    type: String,
+  })
+  last_name: string;
+
+  @ApiProperty({
+    description: 'Email address of the driver',
+    example: 'john.doe@example.com',
+    type: String,
+  })
+  email: string;
+
+  @ApiProperty({
+    description: 'Phone number of the driver',
+    example: '9090909090',
+    type: String,
+  })
+  phone_number: string;
+
+  @ApiProperty({
+    description: 'Unit of the driver',
+    example: 'Logistics',
+    type: String,
+  })
+  unit: string;
+}
