@@ -5,6 +5,7 @@ import { Drivers } from '../drivers/drivers.entity';
 import { Vehicles } from '../vehicle/vehicle.entity';
 import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
 import { Auth } from '../auth/auth.entity';
+import { VehicleRequest } from '../vehicleRequest/vehicleRequest.entity';
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ const config = {
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
-  entities: [Vehicles, Drivers, VehicleAssignment, Auth],
+  entities: [Vehicles, Drivers, VehicleAssignment, Auth, VehicleRequest],
   migrations: ['dist/migrations/*{.ts,.js}'],
   autoLoadEntities: true,
   synchronize: false,

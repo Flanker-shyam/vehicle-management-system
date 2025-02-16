@@ -11,13 +11,17 @@ import { VehicleModule } from './vehicle/vehicle.module';
 import { DriversModule } from './drivers/drivers.module';
 import { VehicleAssignmentModule } from './vehicleAssignment/vehicleAssignment.module';
 import { TasksModule } from './tasks/tasks.module';
+import { VehicleRequestModule } from './vehicleRequest/vehicleRequest.module';
+import { MailerModule } from './mailer/mailer.modules';
 
 @Module({
   imports: [
     AuthModule,
+    MailerModule,
     VehicleModule,
     DriversModule,
     TasksModule,
+    VehicleRequestModule,
     VehicleAssignmentModule,
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
