@@ -13,6 +13,7 @@ import {
   VehicleUpdateRequestDto,
 } from './vehicleRequest.dto';
 import { VehicleRequest } from './vehicleRequest.entity';
+import { ApiResponse } from '@nestjs/swagger';
 
 @Controller()
 @Injectable()
@@ -31,6 +32,11 @@ export class VehicleRequestController {
   }
 
   @Get('vehicleRequest')
+  @ApiResponse({
+    status: 200,
+    description: 'success',
+    type: [VehicleRequest],
+  })
   async getAllRequests(): Promise<VehicleRequest[]> {
     try {
       return await this.vehicleRequestService.getAllRequests();
@@ -38,7 +44,18 @@ export class VehicleRequestController {
       throw err;
     }
   }
-
+  @ApiResponse({
+    status: 200,
+    description: 'success',
+    example: {
+      Gypsy: [1, 2, 4],
+      ALS: [3],
+      Dozer: [4, 5],
+      '2-s ton': [1, 2, 4],
+      Plant: [1, 2, 4],
+      Misc: [1, 2, 4],
+    },
+  })
   @Get('allAvailableVehicles')
   async getAllVehiclesByCategory(): Promise<any> {
     try {
