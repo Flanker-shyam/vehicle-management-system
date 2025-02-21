@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { VehicleRequestService } from './vehicleRequest.service';
 import {
@@ -13,7 +14,7 @@ import {
   VehicleUpdateRequestDto,
 } from './vehicleRequest.dto';
 import { VehicleRequest } from './vehicleRequest.entity';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller()
 @Injectable()
@@ -37,9 +38,17 @@ export class VehicleRequestController {
     description: 'success',
     type: [VehicleRequest],
   })
-  async getAllRequests(): Promise<VehicleRequest[]> {
+  @ApiQuery({ name: 'isApproved', required: false, type: Boolean })
+  @ApiQuery({ name: 'requester', required: false, type: Boolean })
+  async getAllRequests(
+    @Query('isApproved') isApproved?: boolean,
+    @Query('requester') requester?: string,
+  ): Promise<VehicleRequest[]> {
     try {
-      return await this.vehicleRequestService.getAllRequests();
+      return await this.vehicleRequestService.getAllRequests(
+        isApproved,
+        requester,
+      );
     } catch (err) {
       throw err;
     }

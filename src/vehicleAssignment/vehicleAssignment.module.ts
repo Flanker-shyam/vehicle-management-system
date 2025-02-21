@@ -2,7 +2,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { VehicleAssignmentController } from './vehicleAssignment.controller';
-import { VehicleAssignment } from './vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from './vehicleToDriverAssignment.entity';
 import { Vehicles } from '../vehicle/vehicle.entity';
 import { Drivers } from '../drivers/drivers.entity';
 import { VehicleAssignmentService } from './vehicleAssignment.service';

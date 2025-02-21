@@ -28,6 +28,7 @@ export class VehicleService {
     category?: string,
     currentClass?: number,
     sparePartRequested?: string,
+    assigned?: string,
   ): Promise<Vehicles[] | any> {
     try {
       const query = this.vehicleRepository.createQueryBuilder('vehicles');
@@ -49,6 +50,14 @@ export class VehicleService {
             sparePartRequested,
           },
         );
+      }
+
+      if (assigned) {
+        if (assigned === 'unassigned') {
+          query.andWhere('vehicles.assigned_driver IS NULL');
+        } else if (assigned === 'assigned') {
+          query.andWhere('vehicles.assigned_driver IS NOT NULL');
+        }
       }
 
       const vehicles = await query.getMany();
@@ -112,6 +121,9 @@ export class VehicleService {
       }
       if (vehicleData.comments) {
         vehicle.comments = vehicleData.comments;
+      }
+      if (vehicleData.currentClass) {
+        vehicle.current_class = vehicleData.currentClass;
       }
       if (vehicleData.ododmeterReading) {
         const oldReadingLimit = findUpperBound(

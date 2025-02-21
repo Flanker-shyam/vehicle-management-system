@@ -35,9 +35,25 @@ export class VehicleRequestService {
     }
   }
 
-  async getAllRequests(): Promise<VehicleRequest[]> {
+  async getAllRequests(
+    isApproved?: boolean,
+    requester?: string,
+  ): Promise<VehicleRequest[]> {
     try {
-      const requests = await this.vehicleRequestRepository.find();
+      const query = this.vehicleRequestRepository.createQueryBuilder('request');
+
+      if (isApproved !== undefined) {
+        query.andWhere('request.is_approved = :isApproved', { isApproved });
+      }
+
+      if (requester) {
+        query.andWhere('request.email_of_user LIKE :requester', {
+          requester: `%${requester}%`,
+        });
+      }
+
+      const requests = await query.getMany();
+
       return requests.sort((a, b) => {
         if (a.status === b.status) {
           return (

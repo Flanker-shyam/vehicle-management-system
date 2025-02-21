@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from '../config/typeorm';
 import { Drivers } from '../drivers/drivers.entity';
 import { DriverSeedService } from './driver.seed.service';
-import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entity';
 import { AssignmentSeedService } from './assignment.seed.service';
 
 @Module({

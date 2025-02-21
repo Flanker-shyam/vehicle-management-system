@@ -6,10 +6,17 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { VehicleAssignmentService } from './vehicleAssignment.service';
 import { VehicleAssignmentRequestDto } from './dto/vehicleAssignment.request.dto';
-import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { VehicleAssignmentResponseDto } from './dto/vehicleAssignment.response.dto';
 import { VehicleService } from '../vehicle/vehicle.service';
 import { DriversService } from '../drivers/drivers.service';
@@ -33,8 +40,11 @@ export class VehicleAssignmentController {
     description: 'success',
     type: [VehicleAssignmentResponseDto],
   })
-  async getAllAssignments(): Promise<VehicleAssignmentResponseDto[]> {
-    return await this.vehicleAssignmentService.getAllAssignments();
+  @ApiQuery({ name: 'isActive', required: false, type: Boolean })
+  async getAllAssignments(
+    @Query('isActive') isActive?: boolean,
+  ): Promise<VehicleAssignmentResponseDto[]> {
+    return await this.vehicleAssignmentService.getAllAssignments(isActive);
   }
 
   @Get('/get-vehicles-drivers')

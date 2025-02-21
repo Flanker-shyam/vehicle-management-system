@@ -19,9 +19,27 @@ export class DriversService {
     private driversRepository: Repository<Drivers>,
   ) {}
 
-  async getAllDrivers(): Promise<DriversResponseDto[]> {
+  async getAllDrivers(
+    company?: string,
+    assigned?: string,
+  ): Promise<DriversResponseDto[]> {
     try {
-      const drivers = await this.driversRepository.find();
+      console.log(company, assigned);
+      const query = this.driversRepository.createQueryBuilder('drivers');
+
+      if (company) {
+        query.andWhere('drivers.unit = :unit', { unit: company });
+      }
+
+      if (assigned) {
+        if (assigned === 'unassigned') {
+          query.andWhere('drivers.assigned_vehicle IS NULL');
+        } else if (assigned === 'assigned') {
+          query.andWhere('drivers.assigned_vehicle IS NOT NULL');
+        }
+      }
+
+      const drivers = await query.getMany();
       return drivers;
     } catch (err) {
       console.log('Error occured while fetching all drivers', err);

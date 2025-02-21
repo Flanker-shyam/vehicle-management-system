@@ -36,15 +36,18 @@ export class VehicleController {
   @ApiQuery({ name: 'category', required: false, type: String })
   @ApiQuery({ name: 'currentClass', required: false, type: String })
   @ApiQuery({ name: 'sparePartRequested', required: false, type: String })
+  @ApiQuery({ name: 'assigned', required: false, type: String })
   async getAllVehicle(
     @Query('category') category?: string,
     @Query('currentClass') currentClass?: number,
     @Query('sparePartRequested') sparePartRequested?: string,
+    @Query('assigned') assigned?: string,
   ): Promise<getVehicleResponseDto[]> {
     return await this.vehicleService.getAllVehicles(
       category,
       currentClass,
       sparePartRequested,
+      assigned,
     );
   }
 

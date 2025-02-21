@@ -3,7 +3,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { Vehicles } from './vehicle.entity';
 import { VehicleController } from './vehicle.controller';
 import { VehicleService } from './vehicle.service';
-import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from '../vehicleAssignment/vehicleToDriverAssignment.entity';
 import { JwtService } from '@nestjs/jwt';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AdminAuthMiddleware } from '../middlewares/admin-auth.middleware';

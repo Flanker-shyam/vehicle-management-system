@@ -1,11 +1,25 @@
-import { Controller, Get, Body, Post, Param, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Body,
+  Post,
+  Param,
+  Patch,
+  Query,
+} from '@nestjs/common';
 import { DriversResponseDto } from './dto/drivers.response.dto';
 import { DriversService } from './drivers.service';
 import {
   DriversRequestDto,
   UpdateDriversRequestDto,
 } from './dto/drivers.request.dto';
-import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('/driver')
 @ApiBearerAuth()
@@ -19,8 +33,13 @@ export class DriversController {
     description: 'List of all drivers',
     type: [DriversResponseDto],
   })
-  async getAllDrivers(): Promise<DriversResponseDto[]> {
-    return await this.driversService.getAllDrivers();
+  @ApiQuery({ name: 'company', required: false, type: String })
+  @ApiQuery({ name: 'assigned', required: false, type: String })
+  async getAllDrivers(
+    @Query('company') company?: string,
+    @Query('assigned') assigned?: string,
+  ): Promise<DriversResponseDto[]> {
+    return await this.driversService.getAllDrivers(company, assigned);
   }
 
   @Post('add')

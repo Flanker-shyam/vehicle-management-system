@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { VehicleAssignment } from './vehicleToDriverAssignment.entitty';
+import { VehicleAssignment } from './vehicleToDriverAssignment.entity';
 import { Vehicles } from '../vehicle/vehicle.entity';
 import { Drivers } from '../drivers/drivers.entity';
 import { connectionSource } from '../config/typeorm';
@@ -78,9 +78,14 @@ export class VehicleAssignmentService {
     }
   }
 
-  async getAllAssignments(): Promise<VehicleAssignmentResponseDto[]> {
+  async getAllAssignments(
+    isActive?: boolean,
+  ): Promise<VehicleAssignmentResponseDto[]> {
     try {
+      const whereCondition =
+        isActive !== undefined ? { is_active: isActive } : {};
       const assignments = await this.vehicleAssignmentRepository.find({
+        where: whereCondition,
         relations: ['vehicle', 'driver'],
         select: [
           'id',
@@ -110,7 +115,7 @@ export class VehicleAssignmentService {
         updatedAt: assignment.updated_at,
       }));
     } catch (err) {
-      console.log('Error occured while fetching all assignments', err);
+      console.log('Error occurred while fetching all assignments', err);
       throw new InternalServerErrorException(
         `Internal server error: ${err.message}`,
       );

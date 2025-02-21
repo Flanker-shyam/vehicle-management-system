@@ -67,6 +67,13 @@ export class UpdateVehicleRequestDto {
   ododmeterReading: number;
 
   @ApiProperty({
+    description: 'current class of vehicle',
+    type: Number,
+    example: 1,
+  })
+  currentClass: number;
+
+  @ApiProperty({
     description: 'Due date for service',
     type: Date,
     example: '2024-02-03 00:00:00.000',
